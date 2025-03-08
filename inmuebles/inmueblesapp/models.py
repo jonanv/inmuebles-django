@@ -8,8 +8,8 @@ class Inmueble(models.Model):
     pais = models.CharField(max_length=100)
     ciudad = models.CharField(max_length=100)
     descripcion = models.TextField()
-    imagen = models.ImageField(upload_to='inmuebles', null=True, blank=True)
+    imagen = models.CharField(max_length=300)
     active = models.BooleanField(default=True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.nombre
