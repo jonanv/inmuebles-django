@@ -76,7 +76,7 @@ django-admin startproject mystore
 # Create a app in Django
 With cmd: `cd mystore\`
 ```python
-python manage.py startapp comments
+python manage.py startapp commentsapp
 ```
 
 # -----------------------------------------------------------------
@@ -100,13 +100,13 @@ python manage.py migrate
 ### Migrate specific application
 ```python
 python manage.py migrate <applicationName>
-python manage.py migrate comments
+python manage.py migrate commentsapp
 ```
 
 ### Revert migration
 ```python
 python manage.py migrate <applicationName> <migrationNumber>
-python manage.py migrate comments 0001
+python manage.py migrate commentsapp 0001
 ```
 
 # -----------------------------------------------------------------
