@@ -1,4 +1,3 @@
-from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
@@ -21,8 +20,23 @@ def list_all_inmuebles(request) -> Response:
         return Response(deserializer.errors, status=400)
 
 # Get inmueble by id
-@api_view(['GET'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def get_inmueble_by_id(request, id) -> Response:
-    inmueble = Inmueble.objects.get(id=id)
-    serializer = InmuebleSerializer(inmueble)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        inmueble = Inmueble.objects.get(id=id)
+        serializer = InmuebleSerializer(inmueble)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        inmueble = Inmueble.objects.get(id=id)
+        deserializer = InmuebleSerializer(inmueble, data=request.data)
+        if deserializer.is_valid():
+            deserializer.save()
+            return Response(deserializer.data)
+        return Response(deserializer.errors, status=400)
+    elif request.method == 'DELETE':
+        inmueble = Inmueble.objects.get(id=id)
+        inmueble.delete()
+        data = {
+            'message': 'Inmueble deleted successfully',
+        }
+        return Response(data, status=204)
