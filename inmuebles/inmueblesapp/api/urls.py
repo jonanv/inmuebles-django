@@ -1,4 +1,6 @@
 from django.urls import path
+
+# Imports
 from . import views
 
 app_name = 'inmueblesapp'
