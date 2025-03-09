@@ -3,14 +3,18 @@ from rest_framework import serializers
 # Imports
 from ..models import Inmueble
 
+def column_long_validator(value):
+    if len(value) < 2:
+        raise serializers.ValidationError('El valor es demasiado corto')
+
 class InmuebleSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
-    nombre = serializers.CharField(max_length=100)
-    direccion = serializers.CharField(max_length=200)
-    pais = serializers.CharField(max_length=100)
-    ciudad = serializers.CharField(max_length=100)
+    nombre = serializers.CharField()
+    direccion = serializers.CharField(validators=[column_long_validator])
+    pais = serializers.CharField(validators=[column_long_validator])
+    ciudad = serializers.CharField()
     descripcion = serializers.CharField()
-    imagen = serializers.CharField(max_length=300)
+    imagen = serializers.CharField()
     active = serializers.BooleanField(default=True)
 
     def create(self, validated_data):
@@ -30,3 +34,13 @@ class InmuebleSerializer(serializers.Serializer):
     def delete(self, instance):
         instance.delete()
         return instance
+    
+    def validate(self, data):
+        if data['direccion'] == data['pais']:
+            raise serializers.ValidationError('La dirección no puede ser igual al país')
+        return data
+        
+    def validate_imagen(self, data):
+        if len(data) < 2:
+            raise serializers.ValidationError('La url de la imagen es demasiado corta')
+        return data
