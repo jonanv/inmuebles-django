@@ -4,11 +4,17 @@ from rest_framework import serializers
 from ..models import Inmueble
 
 class InmuebleSerializer(serializers.ModelSerializer):
+    longitud_direccion = serializers.SerializerMethodField()
+
     class Meta:
         model = Inmueble
         fields = '__all__'
         # fields = ['id', 'nombre', 'pais', 'descripcion', 'imagen', 'active']
         # exclude = ['id']
+
+    def get_longitud_direccion(self, object):
+        cantidad_caracteres = len(object.direccion)
+        return cantidad_caracteres
 
     def validate(self, data):
         if data['direccion'] == data['pais']:
