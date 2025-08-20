@@ -1,5 +1,11 @@
 # inmuebles-django
 
+# Python
+Show list version python
+```python
+py --list
+```
+
 # Update pip
 ```python
 python -m pip install --upgrade pip
