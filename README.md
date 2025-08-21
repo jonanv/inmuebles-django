@@ -1,4 +1,4 @@
-# inmuebles-django
+# inmuebles-django - Vaxi Drez
 
 # Python
 Show list version python
