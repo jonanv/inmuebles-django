@@ -1,3 +1,6 @@
+# FORMA ANTIGUA DE HACERLO
+# VIEWS ANTERIORES
+
 # from django.http import JsonResponse
 
 # from .models import Inmueble

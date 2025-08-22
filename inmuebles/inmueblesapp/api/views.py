@@ -1,5 +1,4 @@
 from rest_framework.response import Response
-# from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.views import APIView
 
@@ -50,6 +49,9 @@ class InmuebleDetailAV(APIView):
         
         inmueble.delete()
         return Response({'message': 'Inmueble eliminado con éxito'}, status=status.HTTP_204_NO_CONTENT)
+
+# FUNCIONES CON SERIALIZERS
+# from rest_framework.decorators import api_view
 
 # # List all inmuebles
 # @api_view(['GET', 'POST'])
