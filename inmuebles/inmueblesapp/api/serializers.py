@@ -29,7 +29,7 @@ class InmuebleSerializer(serializers.ModelSerializer):
 
 
 
-
+# Serializer with Core Arguments
 
 # def column_long_validator(value):
 #     if len(value) < 2:
