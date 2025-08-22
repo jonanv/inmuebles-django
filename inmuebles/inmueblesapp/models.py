@@ -10,6 +10,11 @@ class Inmueble(models.Model):
     descripcion = models.TextField()
     imagen = models.CharField(max_length=300)
     active = models.BooleanField(default=True)
+    create = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return self.nombre
 
     def __str__(self) -> str:
         return self.nombre
