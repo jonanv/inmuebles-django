@@ -24,6 +24,8 @@ Create the environment (creates a folder in your current directory)
 
 ### 2. Create virtual environment (`cd name_project`)
 ```python
+python -m venv name_project-env
+
 python -m virtualenv name_project-env
 
 virtualenv env_name
