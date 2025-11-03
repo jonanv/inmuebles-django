@@ -52,6 +52,11 @@ deactivate
 
 # Requirements
 
+### Show installed packages
+```python
+pip freeze
+```
+
 ### Save file of requirements
 ```python
 pip freeze > requirements.txt
