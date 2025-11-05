@@ -23,10 +23,12 @@ python -m pip install virtualenv
 Create the environment (creates a folder in your current directory)
 
 ### 2. Create virtual environment (`cd name_project`)
-```python
-python -m venv name_project-env
+`venv` y `virtualenv` crean entornos de Python aislados para gestionar dependencias de proyectos. Venv viene integrado en Python 3.3+, siendo la opción estándar y recomendada para la mayoría de usos modernos. Virtualenv es una herramienta de terceros más rápida, flexible y compatible con Python 2, ideal para necesidades complejas. 
 
-python -m virtualenv name_project-env
+```python
+python -m venv name_project-env                     # Compatible solo con Python 3
+
+python -m virtualenv name_project-env               # Compatible con Python 2 y 3
 
 virtualenv env_name
 ```
