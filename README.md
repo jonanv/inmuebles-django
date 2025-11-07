@@ -96,9 +96,11 @@ python manage.py startapp commentsapp
 # -----------------------------------------------------------------
 
 # Pattern MVT (MVC)
-    - Model: It is the data layer. It is responsible for managing the data of the application. It receives and processes the information sent by the controller and responds to requests for information from the view.
-    - View: It is the presentation layer. It is responsible for displaying the information to the user. It receives the data from the model and formats it for display.
-    - Template: It is the presentation layer. It is responsible for displaying the information to the user. It receives the data from the model and formats it for display.
+- Model: It is the data layer. It is responsible for managing the data of the application. It receives and processes the information sent by the controller and responds to requests for information from the view.
+- View: It is the presentation layer. It is responsible for displaying the information to the user. It receives the data from the model and formats it for display.
+- Template: It is the presentation layer. It is responsible for displaying the information to the user. It receives the data from the model and formats it for display.
+
+![MVT](images/mvt.png)
 
 # -----------------------------------------------------------------
 
