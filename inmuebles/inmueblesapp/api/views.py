@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from ..models import Inmueble
 from .serializers import InmuebleSerializer
 
+# InmueblesListAV: inmuebles list Api View
 class InmueblesListAV(APIView):
     def get(self, request):
         inmuebles = Inmueble.objects.all()
@@ -19,6 +20,7 @@ class InmueblesListAV(APIView):
             return Response(deserializer.data, status=status.HTTP_201_CREATED)
         return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+# InmuebleDetailAV: inmuebles detail Api View
 class InmuebleDetailAV(APIView):
     def get(self, request, id):
         try:
