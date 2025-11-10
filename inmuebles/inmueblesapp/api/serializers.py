@@ -3,6 +3,7 @@ from rest_framework import serializers
 # Imports
 from ..models import Inmueble
 
+# Serializer with ModelSerializer
 class InmuebleSerializer(serializers.ModelSerializer):
     longitud_direccion = serializers.SerializerMethodField()
 

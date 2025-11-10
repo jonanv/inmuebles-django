@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from ..models import Inmueble
 from .serializers import InmuebleSerializer
 
+# FUNCIONES CON CLASES APIView
 # InmueblesListAV: inmuebles list Api View
 class InmueblesListAV(APIView):
     def get(self, request):
