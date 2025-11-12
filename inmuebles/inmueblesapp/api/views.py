@@ -6,9 +6,9 @@ from rest_framework import status
 from ..models import Inmueble
 from .serializers import InmuebleSerializer
 
-# FUNCIONES CON CLASES APIView
+# COMPONENTS CLASS WITH APIView
 # InmueblesListAV: inmuebles list Api View
-class InmueblesListAV(APIView):
+class InmueblesListAV(APIView):             # APIView reconoce los métodos HTTP (get, post, put, delete, etc) por eso no necesita decoradores
     def get(self, request):
         inmuebles = Inmueble.objects.all()
         serializer = InmuebleSerializer(inmuebles, many=True)
@@ -53,7 +53,7 @@ class InmuebleDetailAV(APIView):
         inmueble.delete()
         return Response({'message': 'Inmueble eliminado con éxito'}, status=status.HTTP_204_NO_CONTENT)
 
-# FUNCIONES CON SERIALIZERS
+# FUNCTIONS WITH SERIALIZERS
 # from rest_framework.decorators import api_view
 
 # # List all inmuebles
