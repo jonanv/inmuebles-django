@@ -64,12 +64,12 @@ class InmuebleSerializer(serializers.ModelSerializer):
 #         instance.delete()
 #         return instance
     
-#     def validate(self, data):
+#     def validate(self, data):                   # Es una función preexistente en serializers.Serializer, acá se está sobreescribiendo
 #         if data['direccion'] == data['pais']:
 #             raise serializers.ValidationError('La dirección no puede ser igual al país')
 #         return data
         
-#     def validate_imagen(self, data):
+#     def validate_imagen(self, data):           # validate solo para el campo imagen
 #         if len(data) < 2:
 #             raise serializers.ValidationError('La url de la imagen es demasiado corta')
 #         return data
