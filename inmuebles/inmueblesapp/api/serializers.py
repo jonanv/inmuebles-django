@@ -69,7 +69,7 @@ class InmuebleSerializer(serializers.ModelSerializer):
 #             raise serializers.ValidationError('La dirección no puede ser igual al país')
 #         return data
         
-#     def validate_imagen(self, data):           # validate solo para el campo imagen
+#     def validate_imagen(self, data):           # validate solo para el campo imagen validate_<nombre_campo>
 #         if len(data) < 2:
 #             raise serializers.ValidationError('La url de la imagen es demasiado corta')
 #         return data
