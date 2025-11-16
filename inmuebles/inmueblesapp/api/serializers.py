@@ -5,7 +5,7 @@ from ..models import Inmueble
 
 # Serializer with ModelSerializer
 class InmuebleSerializer(serializers.ModelSerializer):  # ModelSerializer hereda de Serializer, por lo que hereda todas sus funcionalidades, se caracteriza por mapear automáticamente los campos del modelo
-    longitud_direccion = serializers.SerializerMethodField()
+    longitud_direccion = serializers.SerializerMethodField()    # Campo adicional que no existe en el modelo, se crea con SerializerMethodField
 
     class Meta:
         model = Inmueble
