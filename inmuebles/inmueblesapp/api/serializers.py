@@ -4,12 +4,12 @@ from rest_framework import serializers
 from ..models import Inmueble
 
 # Serializer with ModelSerializer
-class InmuebleSerializer(serializers.ModelSerializer):
+class InmuebleSerializer(serializers.ModelSerializer):  # ModelSerializer hereda de Serializer, por lo que hereda todas sus funcionalidades, se caracteriza por mapear automáticamente los campos del modelo
     longitud_direccion = serializers.SerializerMethodField()
 
     class Meta:
         model = Inmueble
-        fields = '__all__'
+        fields = '__all__'          # Indica que se van a serializar todos los campos del modelo
         # fields = ['id', 'nombre', 'pais', 'descripcion', 'imagen', 'active']
         # exclude = ['id']
 
@@ -37,14 +37,14 @@ class InmuebleSerializer(serializers.ModelSerializer):
 #         raise serializers.ValidationError('El valor es demasiado corto')
 
 # class InmuebleSerializer(serializers.Serializer):
-#     id = serializers.IntegerField(read_only=True)
+#     id = serializers.IntegerField(read_only=True)         # Core Arguments -> read_only=True
 #     nombre = serializers.CharField()
 #     direccion = serializers.CharField(validators=[column_long_validator])
 #     pais = serializers.CharField(validators=[column_long_validator])
 #     ciudad = serializers.CharField()
 #     descripcion = serializers.CharField()
 #     imagen = serializers.CharField()
-#     active = serializers.BooleanField(default=True)
+#     active = serializers.BooleanField(default=True)       # Core Arguments -> default=True
 
 #     def create(self, validated_data):
 #         return Inmueble.objects.create(**validated_data)
