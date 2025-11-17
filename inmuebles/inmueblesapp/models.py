@@ -14,7 +14,14 @@ class Inmueble(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return self.nombre
+        return self.direccion
+    
+class Empresa(models.Model):
+    nombre = models.CharField(max_length=250)
+    website = models.CharField(max_length=250)
+    active = models.BooleanField(default=True)
+    create = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
         return self.nombre
