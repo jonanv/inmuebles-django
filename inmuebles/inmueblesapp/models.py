@@ -18,7 +18,7 @@ class Inmueble(models.Model):
     
 class Empresa(models.Model):
     nombre = models.CharField(max_length=250)
-    website = models.CharField(max_length=250)
+    website = models.URLField(max_length=250)       # URLField para URLs
     active = models.BooleanField(default=True)
     create = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
