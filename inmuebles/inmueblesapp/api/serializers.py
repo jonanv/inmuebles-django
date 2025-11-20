@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 # Imports
-from ..models import Inmueble
+from ..models import Inmueble, Empresa
 
 # Serializer with ModelSerializer
 class InmuebleSerializer(serializers.ModelSerializer):  # ModelSerializer hereda de Serializer, por lo que hereda todas sus funcionalidades, se caracteriza por mapear automáticamente los campos del modelo
@@ -13,13 +13,17 @@ class InmuebleSerializer(serializers.ModelSerializer):  # ModelSerializer hereda
         # fields = ['id', 'nombre', 'pais', 'descripcion', 'imagen', 'active']
         # exclude = ['id']
 
+class EmpresaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Empresa
+        fields = '__all__'
 
 
 
 
 
 
-
+# Methods for InmuebleSerializer
 
     # def get_longitud_direccion(self, object):
     #     cantidad_caracteres = len(object.direccion)
