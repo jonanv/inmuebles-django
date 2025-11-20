@@ -13,19 +13,32 @@ class InmuebleSerializer(serializers.ModelSerializer):  # ModelSerializer hereda
         # fields = ['id', 'nombre', 'pais', 'descripcion', 'imagen', 'active']
         # exclude = ['id']
 
-    def get_longitud_direccion(self, object):
-        cantidad_caracteres = len(object.direccion)
-        return cantidad_caracteres
 
-    def validate(self, data):
-        if data['direccion'] == data['pais']:
-            raise serializers.ValidationError('La dirección no puede ser igual al país')
-        return data
+
+
+
+
+
+
+
+    # def get_longitud_direccion(self, object):
+    #     cantidad_caracteres = len(object.direccion)
+    #     return cantidad_caracteres
+
+    # def validate(self, data):
+    #     if data['direccion'] == data['pais']:
+    #         raise serializers.ValidationError('La dirección no puede ser igual al país')
+    #     return data
         
-    def validate_imagen(self, data):
-        if len(data) < 2:
-            raise serializers.ValidationError('La url de la imagen es demasiado corta')
-        return data
+    # def validate_imagen(self, data):
+    #     if len(data) < 2:
+    #         raise serializers.ValidationError('La url de la imagen es demasiado corta')
+    #     return data
+
+
+
+
+
 
 
 
