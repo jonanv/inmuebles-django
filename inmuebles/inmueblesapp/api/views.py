@@ -3,8 +3,9 @@ from rest_framework.response import Response
 from rest_framework import status
 
 # Imports
-from ..models import Inmueble
-from .serializers import InmuebleSerializer
+from ..models import Inmueble, Empresa
+from .serializers import InmuebleSerializer, EmpresaSerializer
+from inmuebles.inmueblesapp.api import serializers
 
 # COMPONENTS CLASS WITH APIView
 # InmueblesListAV: inmuebles list Api View
@@ -52,6 +53,19 @@ class InmuebleDetailAV(APIView):
         
         inmueble.delete()
         return Response({'message': 'Inmueble eliminado con éxito'}, status=status.HTTP_204_NO_CONTENT)
+    
+class EmpresaListAV(APIView):
+    def get(self, request):
+        empresas = Empresa.objects.all()
+        serializer = EmpresaSerializer(empresas, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def post(self, request):
+        deserializer = EmpresaSerializer(data=request.data)
+        if deserializer.is_valid():
+            deserializer.save()
+            return Response(deserializer.data, status=status.HTTP_201_CREATED)
+        return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # FUNCTIONS WITH SERIALIZERS
 # from rest_framework.decorators import api_view
