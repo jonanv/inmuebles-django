@@ -5,7 +5,6 @@ from rest_framework import status
 # Imports
 from ..models import Inmueble, Empresa
 from .serializers import InmuebleSerializer, EmpresaSerializer
-from inmuebles.inmueblesapp.api import serializers
 
 # COMPONENTS CLASS WITH APIView
 # InmueblesListAV: inmuebles list Api View
