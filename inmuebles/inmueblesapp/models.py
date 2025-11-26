@@ -3,7 +3,6 @@ from django.db import models
 # Create your models here.
 # Inmueble model
 class Inmueble(models.Model):
-    nombre = models.CharField(max_length=100)
     direccion = models.CharField(max_length=200)
     pais = models.CharField(max_length=100)
     ciudad = models.CharField(max_length=100)
