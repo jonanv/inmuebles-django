@@ -1,14 +1,14 @@
 from rest_framework import serializers
 
 # Imports
-from ..models import Inmueble, Empresa
+from ..models import Edificacion, Empresa
 
 # Serializer with ModelSerializer
-class InmuebleSerializer(serializers.ModelSerializer):  # ModelSerializer hereda de Serializer, por lo que hereda todas sus funcionalidades, se caracteriza por mapear automáticamente los campos del modelo
+class EdificacionSerializer(serializers.ModelSerializer):  # ModelSerializer hereda de Serializer, por lo que hereda todas sus funcionalidades, se caracteriza por mapear automáticamente los campos del modelo
     longitud_direccion = serializers.SerializerMethodField()    # Campo adicional que no existe en el modelo, se crea con SerializerMethodField
 
     class Meta:
-        model = Inmueble
+        model = Edificacion
         fields = '__all__'          # Indica que se van a serializar todos los campos del modelo
         # fields = ['id', 'nombre', 'pais', 'descripcion', 'imagen', 'active']
         # exclude = ['id']
