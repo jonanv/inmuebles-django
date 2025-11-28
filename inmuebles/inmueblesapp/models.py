@@ -15,6 +15,7 @@ class Inmueble(models.Model):
     def __str__(self) -> str:
         return self.direccion
     
+# Empresa model
 class Empresa(models.Model):
     nombre = models.CharField(max_length=250)
     website = models.URLField(max_length=250)       # URLField para URLs
