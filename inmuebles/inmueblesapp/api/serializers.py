@@ -14,6 +14,8 @@ class EdificacionSerializer(serializers.ModelSerializer):  # ModelSerializer her
         # exclude = ['id']
 
 class EmpresaSerializer(serializers.ModelSerializer):
+    edificacionlist = EdificacionSerializer(many=True, read_only=True)
+    
     class Meta:
         model = Empresa
         fields = '__all__'

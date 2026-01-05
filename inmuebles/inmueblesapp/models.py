@@ -21,7 +21,7 @@ class Edificacion(models.Model):
     descripcion = models.TextField()
     imagen = models.CharField(max_length=300)
     active = models.BooleanField(default=True)
-    empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE, related_name="edificacion")
+    empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE, related_name="edificacionlist")
     create = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
