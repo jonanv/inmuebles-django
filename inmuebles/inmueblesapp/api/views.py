@@ -23,18 +23,18 @@ class EdificacionesListAV(APIView):             # APIView reconoce los métodos 
 
 # EdificacionDetailAV: edificaciones detail Api View
 class EdificacionDetailAV(APIView):
-    def get(self, request, id):
+    def get(self, request, pk):
         try:
-            edificacion = Edificacion.objects.get(id=id)
+            edificacion = Edificacion.objects.get(pk=pk)
         except Edificacion.DoesNotExist:
             return Response({'error': 'El inmueble no existe'}, status=status.HTTP_404_NOT_FOUND)
         
         serializer = EdificacionSerializer(edificacion)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def put(self, request, id):
+    def put(self, request, pk):
         try:
-            edificacion = Edificacion.objects.get(id=id)
+            edificacion = Edificacion.objects.get(pk=pk)
         except Edificacion.DoesNotExist:
             return Response({'error': 'El inmueble no existe'}, status=status.HTTP_404_NOT_FOUND)
         
@@ -44,9 +44,9 @@ class EdificacionDetailAV(APIView):
             return Response(deserializer.data, status=status.HTTP_200_OK)
         return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, id):
+    def delete(self, request, pk):
         try:
-            edificacion = Edificacion.objects.get(id=id)
+            edificacion = Edificacion.objects.get(pk=pk)
         except Edificacion.DoesNotExist:
             return Response({'error': 'El inmueble no existe'}, status=status.HTTP_404_NOT_FOUND)
         
