@@ -56,7 +56,11 @@ class EdificacionDetailAV(APIView):
 class EmpresaListAV(APIView):
     def get(self, request):
         empresas = Empresa.objects.all()
-        serializer = EmpresaSerializer(empresas, many=True)
+        serializer = EmpresaSerializer(
+            empresas, 
+            many=True, 
+            context={'request': request} # Necesario para HyperlinkedRelatedField
+        )
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def post(self, request):

@@ -14,9 +14,14 @@ class EdificacionSerializer(serializers.ModelSerializer):  # ModelSerializer her
         # exclude = ['id']
 
 class EmpresaSerializer(serializers.ModelSerializer):
-    #edificacionlist = EdificacionSerializer(many=True, read_only=True)  # Nested Serializer -> Muestra todos los detalles de cada Edificacion asociada a la Empresa
-    #edificacionlist = serializers.StringRelatedField(many=True)         # Muestra el __str__ de cada Edificacion asociada a la Empresa
-    edificacionlist = serializers.PrimaryKeyRelatedField(many=True, read_only=True)         # Muestra solo los IDs de cada Edificacion asociada a la Empresa
+    # edificacionlist = EdificacionSerializer(many=True, read_only=True)  # Nested Serializer -> Muestra todos los detalles de cada Edificacion asociada a la Empresa
+    # edificacionlist = serializers.StringRelatedField(many=True)         # Muestra el __str__ de cada Edificacion asociada a la Empresa
+    # edificacionlist = serializers.PrimaryKeyRelatedField(many=True, read_only=True)         # Muestra solo los IDs de cada Edificacion asociada a la Empresa
+    edificacionlist = serializers.HyperlinkedRelatedField(
+        many=True, 
+        read_only=True, 
+        view_name='inmueblesapp:get-inmueble-by-id'
+    )  # Muestra enlaces a los detalles de cada Edificacion asociada a la Empresa
 
     class Meta:
         model = Empresa
