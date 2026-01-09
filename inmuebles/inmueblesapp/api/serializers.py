@@ -20,7 +20,7 @@ class EmpresaSerializer(serializers.ModelSerializer):
     edificacionlist = serializers.HyperlinkedRelatedField(
         many=True, 
         read_only=True, 
-        view_name='inmueblesapp:get-inmueble-by-id'
+        view_name='inmueblesapp:get-inmueble-by-id' # Debe llevar el app_name definido en urls.py
     )  # Muestra enlaces a los detalles de cada Edificacion asociada a la Empresa
 
     class Meta:
