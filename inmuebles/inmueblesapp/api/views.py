@@ -69,6 +69,40 @@ class EmpresaListAV(APIView):
             deserializer.save()
             return Response(deserializer.data, status=status.HTTP_201_CREATED)
         return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class EmpresaDetailAV(APIView):
+    def get(self, request, pk):
+        try:
+            empresa = Empresa.objects.get(pk=pk)
+        except Empresa.DoesNotExist:
+            return Response({'error': 'La empresa no existe'}, status=status.HTTP_404_NOT_FOUND)
+        
+        serializer = EmpresaSerializer(
+            empresa, 
+            context={'request': request} # Necesario para HyperlinkedRelatedField
+        )
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def put(self, request, pk):
+        try:
+            empresa = Empresa.objects.get(pk=pk)
+        except Empresa.DoesNotExist:
+            return Response({'error': 'La empresa no existe'}, status=status.HTTP_404_NOT_FOUND)
+        
+        deserializer = EmpresaSerializer(empresa, data=request.data)
+        if deserializer.is_valid():
+            deserializer.save()
+            return Response(deserializer.data, status=status.HTTP_200_OK)
+        return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        try:
+            empresa = Empresa.objects.get(pk=pk)
+        except Empresa.DoesNotExist:
+            return Response({'error': 'La empresa no existe'}, status=status.HTTP_404_NOT_FOUND)
+        
+        empresa.delete()
+        return Response({'message': 'Empresa eliminada con éxito'}, status=status.HTTP_204_NO_CONTENT)
 
 # FUNCTIONS WITH SERIALIZERS
 # from rest_framework.decorators import api_view
