@@ -77,10 +77,7 @@ class EmpresaDetailAV(APIView):
         except Empresa.DoesNotExist:
             return Response({'error': 'La empresa no existe'}, status=status.HTTP_404_NOT_FOUND)
         
-        serializer = EmpresaSerializer(
-            empresa, 
-            context={'request': request} # Necesario para HyperlinkedRelatedField
-        )
+        serializer = EmpresaSerializer(empresa, context={'request': request}) # Necesario para HyperlinkedRelatedField
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request, pk):
