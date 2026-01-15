@@ -9,12 +9,12 @@ from .serializers import EdificacionSerializer, EmpresaSerializer
 # COMPONENTS CLASS WITH APIView
 # EdificacionesListAV: edificaciones list Api View
 class EdificacionesListAV(APIView):             # APIView reconoce los métodos HTTP (get, post, put, delete, etc) por eso no necesita decoradores
-    def get(self, request):
+    def get(self, request) -> Response:
         edificaciones = Edificacion.objects.all()
         serializer = EdificacionSerializer(edificaciones, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
-    def post(self, request):
+    def post(self, request) -> Response:
         deserializer = EdificacionSerializer(data=request.data)
         if deserializer.is_valid():
             deserializer.save()
@@ -23,7 +23,7 @@ class EdificacionesListAV(APIView):             # APIView reconoce los métodos 
 
 # EdificacionDetailAV: edificaciones detail Api View
 class EdificacionDetailAV(APIView):
-    def get(self, request, pk):
+    def get(self, request, pk) -> Response:
         try:
             edificacion = Edificacion.objects.get(pk=pk)
         except Edificacion.DoesNotExist:
@@ -32,7 +32,7 @@ class EdificacionDetailAV(APIView):
         serializer = EdificacionSerializer(edificacion)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def put(self, request, pk):
+    def put(self, request, pk) -> Response:
         try:
             edificacion = Edificacion.objects.get(pk=pk)
         except Edificacion.DoesNotExist:
@@ -44,7 +44,7 @@ class EdificacionDetailAV(APIView):
             return Response(deserializer.data, status=status.HTTP_200_OK)
         return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk):
+    def delete(self, request, pk) -> Response:
         try:
             edificacion = Edificacion.objects.get(pk=pk)
         except Edificacion.DoesNotExist:
@@ -54,7 +54,7 @@ class EdificacionDetailAV(APIView):
         return Response({'message': 'Inmueble eliminado con éxito'}, status=status.HTTP_204_NO_CONTENT)
     
 class EmpresaListAV(APIView):
-    def get(self, request):
+    def get(self, request) -> Response:
         empresas = Empresa.objects.all()
         serializer = EmpresaSerializer(
             empresas, 
@@ -63,7 +63,7 @@ class EmpresaListAV(APIView):
         )
         return Response(serializer.data, status=status.HTTP_200_OK)
     
-    def post(self, request):
+    def post(self, request) -> Response:
         deserializer = EmpresaSerializer(data=request.data)
         if deserializer.is_valid():
             deserializer.save()
@@ -71,7 +71,7 @@ class EmpresaListAV(APIView):
         return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class EmpresaDetailAV(APIView):
-    def get(self, request, pk):
+    def get(self, request, pk) -> Response:
         try:
             empresa = Empresa.objects.get(pk=pk)
         except Empresa.DoesNotExist:
@@ -80,7 +80,7 @@ class EmpresaDetailAV(APIView):
         serializer = EmpresaSerializer(empresa, context={'request': request}) # Necesario para HyperlinkedRelatedField
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def put(self, request, pk):
+    def put(self, request, pk) -> Response:
         try:
             empresa = Empresa.objects.get(pk=pk)
         except Empresa.DoesNotExist:
@@ -92,7 +92,7 @@ class EmpresaDetailAV(APIView):
             return Response(deserializer.data, status=status.HTTP_200_OK)
         return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk):
+    def delete(self, request, pk) -> Response:
         try:
             empresa = Empresa.objects.get(pk=pk)
         except Empresa.DoesNotExist:
