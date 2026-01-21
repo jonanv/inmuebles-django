@@ -8,7 +8,7 @@ class ComentarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comentario
         fields = '__all__'
-        
+
 class EdificacionSerializer(serializers.ModelSerializer):  # ModelSerializer hereda de Serializer, por lo que hereda todas sus funcionalidades, se caracteriza por mapear automáticamente los campos del modelo
     # longitud_direccion = serializers.SerializerMethodField()    # Campo adicional que no existe en el modelo, se crea con SerializerMethodField
     comentarios = ComentarioSerializer(many=True, read_only=True)  # Nested Serializer -> Muestra todos los detalles de cada Comentario asociado a la Edificacion
