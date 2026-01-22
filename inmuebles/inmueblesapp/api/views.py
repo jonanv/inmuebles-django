@@ -1,10 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, mixins, generics
 
 # Imports
-from ..models import Edificacion, Empresa
-from .serializers import EdificacionSerializer, EmpresaSerializer
+from ..models import Edificacion, Empresa, Comentario
+from .serializers import EdificacionSerializer, EmpresaSerializer, ComentarioSerializer
 
 # COMPONENTS CLASS WITH APIView
 # EdificacionesListAV: edificaciones list Api View
@@ -101,6 +101,30 @@ class EmpresaDetailAV(APIView):
         empresa.delete()
         return Response({'message': 'Empresa eliminada con éxito'}, status=status.HTTP_204_NO_CONTENT)
 
+class ComentarioListGAV(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+    # Metodos GET y POST para Comentarios utilizando mixins y generics
+    # Metodos genericos con mixins -> ListModelMixin (GET) y CreateModelMixin (POST)
+    queryset = Comentario.objects.all()         # queryset de todos los comentarios, siempre es necesario definirlo en GenericAPIView
+    serializer_class = ComentarioSerializer     # serializer_class Serializer para Comentario, siempre es necesario definirlo en GenericAPIView
+
+    def get(self, request, *args, **kwargs) -> Response:
+        return self.list(request, *args, **kwargs)
+    
+    def post(self, request, *args, **kwargs) -> Response:
+        return self.create(request, *args, **kwargs)
+    
+# class ComentarioListAV(APIView):
+#     def get(self, request) -> Response:
+#         comentarios = Comentario.objects.all()
+#         serializer = ComentarioSerializer(comentarios, many=True)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+#     def post(self, request) -> Response:
+#         deserializer = ComentarioSerializer(data=request.data)
+#         if deserializer.is_valid():
+#             deserializer.save()
+#             return Response(deserializer.data, status=status.HTTP_201_CREATED)
+#         return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
 # FUNCTIONS WITH SERIALIZERS
 # from rest_framework.decorators import api_view
 
