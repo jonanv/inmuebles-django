@@ -125,6 +125,23 @@ class ComentarioListGAV(mixins.ListModelMixin, mixins.CreateModelMixin, generics
 #             deserializer.save()
 #             return Response(deserializer.data, status=status.HTTP_201_CREATED)
 #         return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ComentarioDetailGAV(mixins.ListModelMixin, mixins.RetrieveModelMixin, generics.GenericAPIView):
+    # Metodos GET y POST para Comentarios utilizando mixins y generics
+    # Metodos genericos con mixins -> ListModelMixin (GET) y CreateModelMixin (POST)
+    queryset = Comentario.objects.all()
+    serializer_class = ComentarioSerializer
+
+    def get(self, request, *args, **kwargs) -> Response:
+        return self.retrieve(request, *args, **kwargs)      # Obtener un solo comentario por ID
+
+
+
+
+
+
+
+
 # FUNCTIONS WITH SERIALIZERS
 # from rest_framework.decorators import api_view
 
