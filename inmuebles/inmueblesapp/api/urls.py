@@ -10,4 +10,5 @@ urlpatterns = [
     path('empresa/list/', views.EmpresaListAV.as_view(), name='list-all-empresas'),                 # /inmueble/empresa/list/
     path('empresa/<int:pk>/', views.EmpresaDetailAV.as_view(), name='get-empresa-by-id'),           # /inmueble/empresa/1/
     path('comentario/list/', views.ComentarioListGAV.as_view(), name='list-all-comentarios'),       # /inmueble/comentario/list/
+    path('comentario/<int:pk>/', views.ComentarioDetailGAV.as_view(), name='get-comentario-by-id'), # /inmueble/comentario/list/
 ]
