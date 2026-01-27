@@ -101,18 +101,17 @@ class EmpresaDetailAV(APIView):
         empresa.delete()
         return Response({'message': 'Empresa eliminada con éxito'}, status=status.HTTP_204_NO_CONTENT)
 
-class ComentarioListGAV(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
-    # Metodos GET y POST para Comentarios utilizando mixins y generics
-    # Metodos genericos con mixins -> ListModelMixin (GET) y CreateModelMixin (POST)
-    queryset = Comentario.objects.all()         # queryset de todos los comentarios, siempre es necesario definirlo en GenericAPIView
-    serializer_class = ComentarioSerializer     # serializer_class Serializer para Comentario, siempre es necesario definirlo en GenericAPIView
+# Generic Views pero con ListCreateAPIView, hace lo mismo que el ComentarioListGAV con menos código
+class ComentarioListGAV(generics.ListCreateAPIView):
+    queryset = Comentario.objects.all()
+    serializer_class = ComentarioSerializer
 
-    def get(self, request, *args, **kwargs) -> Response:
-        return self.list(request, *args, **kwargs)
-    
-    def post(self, request, *args, **kwargs) -> Response:
-        return self.create(request, *args, **kwargs)
-    
+# Generic Views pero con RetrieveUpdateDestroyAPIView, hace lo mismo que el ComentarioDetailGAV con menos código
+class ComentarioDetailGAV(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Comentario.objects.all()
+    serializer_class = ComentarioSerializer
+
+# Vistas para Comentario utilizando APIView
 # class ComentarioListAV(APIView):
 #     def get(self, request) -> Response:
 #         comentarios = Comentario.objects.all()
@@ -126,14 +125,27 @@ class ComentarioListGAV(mixins.ListModelMixin, mixins.CreateModelMixin, generics
 #             return Response(deserializer.data, status=status.HTTP_201_CREATED)
 #         return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class ComentarioDetailGAV(mixins.ListModelMixin, mixins.RetrieveModelMixin, generics.GenericAPIView):
-    # Metodos GET y POST para Comentarios utilizando mixins y generics
-    # Metodos genericos con mixins -> ListModelMixin (GET) y CreateModelMixin (POST)
-    queryset = Comentario.objects.all()
-    serializer_class = ComentarioSerializer
+# class ComentarioListGAV(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+#     # Metodos GET y POST para Comentarios utilizando mixins y generics
+#     # Metodos genericos con mixins -> ListModelMixin (GET) y CreateModelMixin (POST)
+#     queryset = Comentario.objects.all()         # queryset de todos los comentarios, siempre es necesario definirlo en GenericAPIView
+#     serializer_class = ComentarioSerializer     # serializer_class Serializer para Comentario, siempre es necesario definirlo en GenericAPIView
 
-    def get(self, request, *args, **kwargs) -> Response:
-        return self.retrieve(request, *args, **kwargs)      # Obtener un solo comentario por ID
+#     def get(self, request, *args, **kwargs) -> Response:
+#         return self.list(request, *args, **kwargs)
+    
+#     def post(self, request, *args, **kwargs) -> Response:
+#         return self.create(request, *args, **kwargs)
+    
+
+# class ComentarioDetailGAV(mixins.ListModelMixin, mixins.RetrieveModelMixin, generics.GenericAPIView):
+#     # Metodos GET y POST para Comentarios utilizando mixins y generics
+#     # Metodos genericos con mixins -> ListModelMixin (GET) y CreateModelMixin (POST)
+#     queryset = Comentario.objects.all()
+#     serializer_class = ComentarioSerializer
+
+#     def get(self, request, *args, **kwargs) -> Response:
+#         return self.retrieve(request, *args, **kwargs)      # Obtener un solo comentario por ID
 
 
 
