@@ -26,6 +26,10 @@ Create the environment (creates a folder in your current directory)
 ```python
 python -m virtualenv name_project-env
 
+py -2 -m virtualenv virtualenv
+
+py -3.14 -m virtualenv virtualenv
+
 virtualenv env_name
 ```
 
