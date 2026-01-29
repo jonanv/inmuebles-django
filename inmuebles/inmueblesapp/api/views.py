@@ -102,12 +102,17 @@ class EmpresaDetailAV(APIView):
         return Response({'message': 'Empresa eliminada con éxito'}, status=status.HTTP_204_NO_CONTENT)
 
 # Generic Views pero con ListCreateAPIView, hace lo mismo que el ComentarioListGAV con menos código
-class ComentarioListGAV(generics.ListCreateAPIView):
-    queryset = Comentario.objects.all()
+class ComentarioList(generics.ListCreateAPIView):
+    # queryset = Comentario.objects.all()
     serializer_class = ComentarioSerializer
 
+    def get_queryset(self):
+        # Filtrar comentarios por edificacion
+        edificacion_id = self.kwargs.get('pk')
+        return Comentario.objects.filter(edificacion=edificacion_id)
+
 # Generic Views pero con RetrieveUpdateDestroyAPIView, hace lo mismo que el ComentarioDetailGAV con menos código
-class ComentarioDetailGAV(generics.RetrieveUpdateDestroyAPIView):
+class ComentarioDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comentario.objects.all()
     serializer_class = ComentarioSerializer
 
