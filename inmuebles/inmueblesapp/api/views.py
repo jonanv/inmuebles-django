@@ -109,7 +109,16 @@ class ComentarioList(generics.ListCreateAPIView):
     def get_queryset(self):
         # Filtrar comentarios por edificacion
         edificacion_id = self.kwargs.get('pk')
-        return Comentario.objects.filter(edificacion=edificacion_id)
+        return Comentario.objects.filter(edificacion=edificacion_id) # edificacion es el atributo ForeignKey en el modelo Comentario
+
+class ComentarioCreate(generics.CreateAPIView):
+    serializer_class = ComentarioSerializer
+
+    def perform_create(self, serializer):
+        # Asociar el comentario a la edificacion correspondiente
+        edificacion_id = self.kwargs.get('pk')
+        edificacion = Edificacion.objects.get(pk=edificacion_id)
+        serializer.save(edificacion=edificacion) # edificacion es el atributo ForeignKey en el modelo Comentario
 
 # Generic Views pero con RetrieveUpdateDestroyAPIView, hace lo mismo que el ComentarioDetailGAV con menos código
 class ComentarioDetail(generics.RetrieveUpdateDestroyAPIView):
