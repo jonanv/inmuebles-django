@@ -7,7 +7,8 @@ from ..models import Edificacion, Empresa, Comentario
 class ComentarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comentario
-        fields = '__all__'
+        # fields = '__all__'
+        exclude = ['edificacion']       # Si se quiere monstrar todos los campos excepto edificacion se debe de comentar fields y descomentar exclude, no se pueden usar ambos a la vez, excepto exclude y fields juntos pero con fields indicando los campos a mostrar, no se pueden usar ambos con __all__
 
 class EdificacionSerializer(serializers.ModelSerializer):  # ModelSerializer hereda de Serializer, por lo que hereda todas sus funcionalidades, se caracteriza por mapear automáticamente los campos del modelo
     # longitud_direccion = serializers.SerializerMethodField()    # Campo adicional que no existe en el modelo, se crea con SerializerMethodField
