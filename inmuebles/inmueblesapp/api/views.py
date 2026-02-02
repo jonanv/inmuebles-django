@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status, mixins, generics
+from rest_framework import status, mixins, generics, viewsets
+from django.shortcuts import get_object_or_404
 
 # Imports
 from ..models import Edificacion, Empresa, Comentario
@@ -52,7 +53,20 @@ class EdificacionDetailAV(APIView):
         
         edificacion.delete()
         return Response({'message': 'Inmueble eliminado con éxito'}, status=status.HTTP_204_NO_CONTENT)
+
+# Vista utlizando ViewSet, se puede usar con routers para generar automáticamente las rutas, pero no es necesario definir los métodos HTTP, se pueden definir métodos personalizados
+class EmpresaListVS(viewsets.ViewSet):
+    def list(self, request) -> Response:
+        empresas = Empresa.objects.all()
+        serializer = EmpresaSerializer(empresas, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
+    def retrieve(self, request, pk) -> Response:
+        queryset = Empresa.object.all()
+        edificacionlist = get_object_or_404(queryset, pk=pk)
+        serializer = EmpresaSerializer(edificacionlist)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 class EmpresaListAV(APIView):
     def get(self, request) -> Response:
         empresas = Empresa.objects.all()
