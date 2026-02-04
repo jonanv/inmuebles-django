@@ -20,8 +20,8 @@ class EdificacionSerializer(serializers.ModelSerializer):  # ModelSerializer her
         # fields = ['id', 'nombre', 'pais', 'descripcion', 'imagen', 'active']
         # exclude = ['id']
 
-class EmpresaSerializer(serializers.HyperlinkedModelSerializer):
-    url = serializers.HyperlinkedIdentityField(view_name='inmueblesapp:get-empresa-by-id')
+class EmpresaSerializer(serializers.ModelSerializer):
+    # url = serializers.HyperlinkedIdentityField(view_name='inmueblesapp:get-empresa-by-id')
     
     edificacionlist = EdificacionSerializer(many=True, read_only=True)  # Nested Serializer -> Muestra todos los detalles de cada Edificacion asociada a la Empresa
     # edificacionlist = serializers.StringRelatedField(many=True)         # Muestra el __str__ de cada Edificacion asociada a la Empresa
