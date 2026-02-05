@@ -62,7 +62,7 @@ class EmpresaListVS(viewsets.ViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def retrieve(self, request, pk) -> Response:
-        queryset = Empresa.object.all()
+        queryset = Empresa.objects.all()
         edificacionlist = get_object_or_404(queryset, pk=pk)
         serializer = EmpresaSerializer(edificacionlist)
         return Response(serializer.data, status=status.HTTP_200_OK)
