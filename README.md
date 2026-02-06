@@ -30,7 +30,9 @@ python -m venv name_project-env                     # Compatible solo con Python
 
 python -m virtualenv name_project-env               # Compatible con Python 2 y 3
 
-virtualenv env_name
+py -2 -m virtualenv env_name
+
+py -3.14 -m virtualenv env_name
 ```
 
 ### 3. Activate virtual environment
