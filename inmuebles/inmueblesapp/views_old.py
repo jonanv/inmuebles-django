@@ -7,7 +7,7 @@
 
 # # Create your views here.
 # def list_all_inmuebles(request) -> JsonResponse:
-#     inmuebles = Inmueble.objects.all()
+#     inmuebles = Inmueble.objects.all()    # Resultado de inmuebles de tipo QuerySet
 #     data = {
 #         'inmuebles': list(inmuebles.values())
 #     }

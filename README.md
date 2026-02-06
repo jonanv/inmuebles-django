@@ -23,14 +23,16 @@ python -m pip install virtualenv
 Create the environment (creates a folder in your current directory)
 
 ### 2. Create virtual environment (`cd name_project`)
+`venv` y `virtualenv` crean entornos de Python aislados para gestionar dependencias de proyectos. Venv viene integrado en Python 3.3+, siendo la opción estándar y recomendada para la mayoría de usos modernos. Virtualenv es una herramienta de terceros más rápida, flexible y compatible con Python 2, ideal para necesidades complejas. 
+
 ```python
-python -m virtualenv env_name
+python -m venv name_project-env                     # Compatible solo con Python 3
+
+python -m virtualenv name_project-env               # Compatible con Python 2 y 3
 
 py -2 -m virtualenv env_name
 
 py -3.14 -m virtualenv env_name
-
-virtualenv env_name
 ```
 
 ### 3. Activate virtual environment
@@ -53,6 +55,11 @@ deactivate
 # -----------------------------------------------------------------
 
 # Requirements
+
+### Show installed packages
+```python
+pip freeze
+```
 
 ### Save file of requirements
 ```python
@@ -88,6 +95,14 @@ With cmd: `cd mystore\`
 ```python
 python manage.py startapp commentsapp
 ```
+# -----------------------------------------------------------------
+
+# Pattern MVT (MVC)
+- Model: It is the data layer. It is responsible for managing the data of the application. It receives and processes the information sent by the controller and responds to requests for information from the view.
+- View: It is the presentation layer. It is responsible for displaying the information to the user. It receives the data from the model and formats it for display.
+- Template: It is the presentation layer. It is responsible for displaying the information to the user. It receives the data from the model and formats it for display.
+
+![MVT](images/mvt.png)
 
 # -----------------------------------------------------------------
 
