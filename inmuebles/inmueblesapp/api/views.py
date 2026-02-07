@@ -85,6 +85,15 @@ class EmpresaListVS(viewsets.ViewSet):
             deserializer.save()
             return Response(deserializer.data, status=status.HTTP_200_OK)
         return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def destroy(self, request, pk) -> Response:
+        try:
+            queryset = Empresa.objects.get(pk=pk)
+        except Empresa.DoesNotExist:
+            return Response({'error': 'La empresa no existe'}, status=status.HTTP_404_NOT_FOUND)
+        
+        queryset.delete()
+        return Response({'message': 'Empresa eliminada con éxito'}, status=status.HTTP_204_NO_CONTENT)
 
 class EmpresaListAV(APIView):
     def get(self, request) -> Response:
