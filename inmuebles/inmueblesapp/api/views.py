@@ -73,6 +73,18 @@ class EmpresaListVS(viewsets.ViewSet):
             deserializer.save()
             return Response(deserializer.data, status=status.HTTP_201_CREATED)
         return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def update(selft, request, pk) -> Response:
+        try:
+            queryset = Empresa.objects.get(pk=pk)
+        except Empresa.DoesNotExist:
+            return Response({'error': 'La empresa no existe'}, status=status.HTTP_404_NOT_FOUND)
+        
+        deserializer = EmpresaSerializer(queryset, data=request.data)
+        if deserializer.is_valid():
+            deserializer.save()
+            return Response(deserializer.data, status=status.HTTP_200_OK)
+        return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class EmpresaListAV(APIView):
     def get(self, request) -> Response:
