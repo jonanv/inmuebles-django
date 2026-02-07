@@ -54,46 +54,51 @@ class EdificacionDetailAV(APIView):
         edificacion.delete()
         return Response({'message': 'Inmueble eliminado con éxito'}, status=status.HTTP_204_NO_CONTENT)
 
+# Vistas para Empresa utilizando ViewSet, se puede usar con routers para generar automáticamente las rutas, pero no es necesario definir los métodos HTTP, se pueden definir métodos personalizados, reemplaza a EmpresaListAV y EmpresaDetailAV, se comenta estas dos vistas para evitar conflictos con las rutas generadas por el router, si se quieren usar ambas formas de vista, se deben definir rutas diferentes para cada una en urls.py
+class EmpresaListVS(viewsets.ModelViewSet):
+    queryset = Empresa.objects.all()
+    serializer_class = EmpresaSerializer
+
 # Vista utlizando ViewSet, se puede usar con routers para generar automáticamente las rutas, pero no es necesario definir los métodos HTTP, se pueden definir métodos personalizados
-class EmpresaListVS(viewsets.ViewSet):
-    def list(self, request) -> Response:
-        queryset = Empresa.objects.all()
-        serializer = EmpresaSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+# class EmpresaListVS(viewsets.ViewSet):
+#     def list(self, request) -> Response:
+#         queryset = Empresa.objects.all()
+#         serializer = EmpresaSerializer(queryset, many=True)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
     
-    def retrieve(self, request, pk) -> Response:
-        queryset = Empresa.objects.all()
-        edificacionlist = get_object_or_404(queryset, pk=pk)
-        serializer = EmpresaSerializer(edificacionlist)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+#     def retrieve(self, request, pk) -> Response:
+#         queryset = Empresa.objects.all()
+#         edificacionlist = get_object_or_404(queryset, pk=pk)
+#         serializer = EmpresaSerializer(edificacionlist)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
     
-    def create(self, request) -> Response:
-        deserializer = EmpresaSerializer(data=request.data)
-        if deserializer.is_valid():
-            deserializer.save()
-            return Response(deserializer.data, status=status.HTTP_201_CREATED)
-        return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     def create(self, request) -> Response:
+#         deserializer = EmpresaSerializer(data=request.data)
+#         if deserializer.is_valid():
+#             deserializer.save()
+#             return Response(deserializer.data, status=status.HTTP_201_CREATED)
+#         return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    def update(selft, request, pk) -> Response:
-        try:
-            queryset = Empresa.objects.get(pk=pk)
-        except Empresa.DoesNotExist:
-            return Response({'error': 'La empresa no existe'}, status=status.HTTP_404_NOT_FOUND)
+#     def update(selft, request, pk) -> Response:
+#         try:
+#             queryset = Empresa.objects.get(pk=pk)
+#         except Empresa.DoesNotExist:
+#             return Response({'error': 'La empresa no existe'}, status=status.HTTP_404_NOT_FOUND)
         
-        deserializer = EmpresaSerializer(queryset, data=request.data)
-        if deserializer.is_valid():
-            deserializer.save()
-            return Response(deserializer.data, status=status.HTTP_200_OK)
-        return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#         deserializer = EmpresaSerializer(queryset, data=request.data)
+#         if deserializer.is_valid():
+#             deserializer.save()
+#             return Response(deserializer.data, status=status.HTTP_200_OK)
+#         return Response(deserializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    def destroy(self, request, pk) -> Response:
-        try:
-            queryset = Empresa.objects.get(pk=pk)
-        except Empresa.DoesNotExist:
-            return Response({'error': 'La empresa no existe'}, status=status.HTTP_404_NOT_FOUND)
+#     def destroy(self, request, pk) -> Response:
+#         try:
+#             queryset = Empresa.objects.get(pk=pk)
+#         except Empresa.DoesNotExist:
+#             return Response({'error': 'La empresa no existe'}, status=status.HTTP_404_NOT_FOUND)
         
-        queryset.delete()
-        return Response({'message': 'Empresa eliminada con éxito'}, status=status.HTTP_204_NO_CONTENT)
+#         queryset.delete()
+#         return Response({'message': 'Empresa eliminada con éxito'}, status=status.HTTP_204_NO_CONTENT)
 
 class EmpresaListAV(APIView):
     def get(self, request) -> Response:
