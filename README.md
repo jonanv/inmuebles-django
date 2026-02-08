@@ -17,6 +17,8 @@ python -m pip install --upgrade pip
 ### 1. Install virtualenv
 ```python
 python -m pip install virtualenv
+
+py -V:3.12 -m pip install virtualenv        # Install for specific version
 ```
 
 ## Quick start
@@ -28,11 +30,13 @@ Create the environment (creates a folder in your current directory)
 ```python
 python -m venv name_project-env                     # Compatible solo con Python 3
 
-python -m virtualenv name_project-env               # Compatible con Python 2 y 3
+python -m virtualenv name_project-env               # Compatible con Python 2 y 3, más rápido y flexible
 
 py -2 -m virtualenv env_name
 
 py -3.14 -m virtualenv env_name
+
+py -3.12 -m virtualenv virtualenv
 ```
 
 ### 3. Activate virtual environment
