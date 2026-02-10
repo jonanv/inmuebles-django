@@ -5,6 +5,7 @@ from ..models import Edificacion, Empresa, Comentario
 
 # Serializer with ModelSerializer
 class ComentarioSerializer(serializers.ModelSerializer):
+    comentario_user = serializers.StringRelatedField(read_only=True)  # Muestra el __str__ del usuario que hizo el comentario
     class Meta:
         model = Comentario
         # fields = '__all__'
