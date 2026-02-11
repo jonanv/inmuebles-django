@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, mixins, generics, viewsets
+from rest_framework.exceptions import ValidationError
 from django.shortcuts import get_object_or_404
 
 # Imports
@@ -165,7 +166,13 @@ class ComentarioCreate(generics.CreateAPIView):
         # Asociar el comentario a la edificacion correspondiente
         edificacion_id = self.kwargs.get('pk')
         edificacion = Edificacion.objects.get(pk=edificacion_id)
-        serializer.save(edificacion=edificacion) # edificacion es el atributo ForeignKey en el modelo Comentario
+
+        user = self.request.user  # Obtener el usuario autenticado que hace el comentario
+        comentario_queryset = Comentario.objects.filter(edificacion=edificacion, comentario_user=user)
+        if comentario_queryset.exists():
+            raise ValidationError('El usuario ya ha hecho un comentario para esta edificacion')
+
+        serializer.save(edificacion=edificacion, comentario_user=user) # edificacion es el atributo ForeignKey en el modelo Comentario
 
 # Generic Views pero con RetrieveUpdateDestroyAPIView, hace lo mismo que el ComentarioDetailGAV con menos código
 class ComentarioDetail(generics.RetrieveUpdateDestroyAPIView):
