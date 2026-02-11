@@ -162,6 +162,9 @@ class ComentarioList(generics.ListCreateAPIView):
 class ComentarioCreate(generics.CreateAPIView):
     serializer_class = ComentarioSerializer
 
+    def get_queryset(self):
+        return Comentario.objects.all()
+
     def perform_create(self, serializer):
         # Asociar el comentario a la edificacion correspondiente
         edificacion_id = self.kwargs.get('pk')
