@@ -176,8 +176,17 @@ class ComentarioCreate(generics.CreateAPIView):
 
         user = self.request.user  # Obtener el usuario autenticado que hace el comentario
         comentario_queryset = Comentario.objects.filter(edificacion=edificacion, comentario_user=user)
+
         if comentario_queryset.exists():
             raise ValidationError('El usuario ya ha hecho un comentario para esta edificacion')
+        
+        if edificacion.number_calificacion == 0:
+            edificacion.avg_calificacion = serializer.validated_data['calificacion']
+        else:
+            edificacion.avg_calificacion = (serializer.validated_data['calificacion'] + edificacion.avg_calificacion) / 2
+
+        edificacion.number_calificacion += 1
+        edificacion.save()
 
         serializer.save(edificacion=edificacion, comentario_user=user) # edificacion es el atributo ForeignKey en el modelo Comentario
 
