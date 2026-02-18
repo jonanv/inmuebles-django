@@ -8,3 +8,11 @@ class AdminOrReadOnly(permissions.IsAdminUser):
         
         staff_permission = bool(request.user and request.user.is_staff)
         return staff_permission
+    
+class ComentarioUserOrReadOnly(permissions.BasePermission):
+    # Permite acceso de solo lectura a usuarios no autenticados, pero permite a los usuarios autenticados modificar solo sus propios comentarios
+    def has_object_permission(self, request, view, obj) -> bool:
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        else:
+            return obj.comentario_user == request.user
