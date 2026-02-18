@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404
 # Imports
 from ..models import Edificacion, Empresa, Comentario
 from .serializers import EdificacionSerializer, EmpresaSerializer, ComentarioSerializer
-from .permissions import AdminOrReadOnly
+from .permissions import AdminOrReadOnly, ComentarioUserOrReadOnly
 
 # COMPONENTS CLASS WITH APIView
 # EdificacionesListAV: edificaciones list Api View
@@ -185,6 +185,7 @@ class ComentarioCreate(generics.CreateAPIView):
 class ComentarioDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comentario.objects.all()
     serializer_class = ComentarioSerializer
+    permission_classes = [ComentarioUserOrReadOnly] # Permite acceso de solo lectura a usuarios no autenticados, pero permite a los usuarios autenticados modificar solo sus propios comentarios
 
 # Vistas para Comentario utilizando APIView
 # class ComentarioListAV(APIView):
