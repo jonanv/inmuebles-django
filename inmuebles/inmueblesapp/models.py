@@ -23,6 +23,8 @@ class Edificacion(models.Model):
     descripcion = models.TextField()
     imagen = models.CharField(max_length=300)
     active = models.BooleanField(default=True)
+    avg_calificacion = models.FloatField(default=0) # Campo para almacenar el promedio de calificaciones
+    number_calificacion = models.IntegerField(default=0) # Campo para almacenar el número de calificaciones
     empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE, related_name="edificacionlist")
     create = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
