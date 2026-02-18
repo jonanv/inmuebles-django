@@ -157,6 +157,7 @@ class EmpresaDetailAV(APIView):
 class ComentarioList(generics.ListCreateAPIView):
     # queryset = Comentario.objects.all()
     serializer_class = ComentarioSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         # Filtrar comentarios por edificacion
