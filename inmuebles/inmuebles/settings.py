@@ -128,5 +128,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated', # Requiere autenticación para acceder a la API
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication', # Permite autenticación básica para acceder a la API, se puede cambiar a TokenAuthentication o SessionAuthentication según las necesidades del proyecto
     ]
 }
