@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'inmueblesapp',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -126,10 +127,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Django REST Framework settings
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated', # Requiere autenticación para acceder a la API
-    ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated', # Requiere autenticación para acceder a la API
+    # ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication', # Permite autenticación básica para acceder a la API, se puede cambiar a TokenAuthentication o SessionAuthentication según las necesidades del proyecto
+        # 'rest_framework.authentication.BasicAuthentication', # Permite autenticación básica para acceder a la API
+        'rest_framework.authentication.TokenAuthentication', # Permite autenticación por token para acceder a la API
     ]
 }
