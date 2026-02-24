@@ -11,7 +11,7 @@ py --list
 python -m pip install --upgrade pip
 ```
 
-# -----------------------------------------------------------------
+---
 
 # Create virtual environment
 ### 1. Install virtualenv
@@ -56,7 +56,7 @@ source env_name/bin/activate
 deactivate
 ```
 
-# -----------------------------------------------------------------
+---
 
 # Requirements
 
@@ -75,7 +75,7 @@ pip freeze > requirements.txt
 pip install -r requirements.txt
 ```
 
-# -----------------------------------------------------------------
+---
 
 # Install Django
 ```python
@@ -99,7 +99,7 @@ With cmd: `cd mystore\`
 ```python
 python manage.py startapp commentsapp
 ```
-# -----------------------------------------------------------------
+---
 
 # Pattern MVT (MVC)
 - Model: It is the data layer. It is responsible for managing the data of the application. It receives and processes the information sent by the controller and responds to requests for information from the view.
@@ -108,7 +108,7 @@ python manage.py startapp commentsapp
 
 ![MVT](images/mvt.png)
 
-# -----------------------------------------------------------------
+---
 
 # Test
 ### Init tests
@@ -117,7 +117,7 @@ python manage.py test
 python manage.py testserver
 ```
 
-# -----------------------------------------------------------------
+---
 
 # Migration
 ### Create and run migrations
@@ -138,7 +138,7 @@ python manage.py migrate <applicationName> <migrationNumber>
 python manage.py migrate commentsapp 0001
 ```
 
-# -----------------------------------------------------------------
+---
 
 # Superuser
 ### Create superuser and password
@@ -147,7 +147,7 @@ python manage.py createsuperuser
 python manage.py changepassword
 ```
 
-# -----------------------------------------------------------------
+---
 
 # Run project
 With cmd: `cd mystore\`
@@ -155,7 +155,7 @@ With cmd: `cd mystore\`
 python .\manage.py runserver 8081
 ```
 
-# -----------------------------------------------------------------
+---
 
 # Shell (Interactive console)
 ```python
