@@ -7,7 +7,7 @@ from rest_framework.authtoken.models import Token
 from .serializers import RegistrarSerializer
 
 @api_view(['POST'])
-def registrar_view(request):
+def registrar_view(request) -> Response:
     if request.method == 'POST':
         serializer = RegistrarSerializer(data=request.data)
         data = {}
@@ -19,6 +19,13 @@ def registrar_view(request):
             data['email'] = account.email
             token = Token.objects.get(user=account).key
             data['token'] = token
-            
+
             return Response(data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['POST'])
+def logout_view(request) -> Response:
+    if request.method == 'POST':
+        request.user.auth_token.delete()  # Elimina el token del usuario para cerrar sesión
+        return Response({'response': 'Sesión cerrada exitosamente.'}, status=status.HTTP_200_OK)
+    return Response({'error': 'Método no permitido.'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
