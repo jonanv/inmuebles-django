@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'inmueblesapp',
     'rest_framework',
     'rest_framework.authtoken',
+    'userapp',
 ]
 
 MIDDLEWARE = [
