@@ -18,7 +18,7 @@ class RegistrarSerializer(serializers.ModelSerializer):
         if password != password2:
             raise serializers.ValidationError({'password': 'Las contraseñas no coinciden.'})
         
-        if User.objects.filter(email=self.validated_data['email'].exists()).exists():
+        if User.objects.filter(email=self.validated_data['email']).exists():
             raise serializers.ValidationError({'email': 'El correo electrónico ya está registrado.'})
         
         account = User(
