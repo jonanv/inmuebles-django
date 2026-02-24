@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404
 # Imports
 from ..models import Edificacion, Empresa, Comentario
 from .serializers import EdificacionSerializer, EmpresaSerializer, ComentarioSerializer
-from .permissions import AdminOrReadOnly, ComentarioUserOrReadOnly
+from .permissions import IsAdminOrReadOnly, IsComentarioUserOrReadOnly
 
 # COMPONENTS CLASS WITH APIView
 # EdificacionesListAV: edificaciones list Api View
@@ -60,7 +60,7 @@ class EdificacionDetailAV(APIView):
 # Vistas para Empresa utilizando ViewSet, se puede usar con routers para generar automáticamente las rutas, pero no es necesario definir los métodos HTTP, se pueden definir métodos personalizados, reemplaza a EmpresaListAV y EmpresaDetailAV, se comenta estas dos vistas para evitar conflictos con las rutas generadas por el router, si se quieren usar ambas formas de vista, se deben definir rutas diferentes para cada una en urls.py
 class EmpresaListVS(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated] # Requiere autenticación para acceder a esta vista
-    permission_classes = [AdminOrReadOnly] # Permite acceso de solo lectura a usuarios no autenticados, pero requiere permisos de administrador para métodos que modifican datos (POST, PUT, DELETE)
+    permission_classes = [IsAdminOrReadOnly] # Permite acceso de solo lectura a usuarios no autenticados, pero requiere permisos de administrador para métodos que modifican datos (POST, PUT, DELETE)
     queryset = Empresa.objects.all()
     serializer_class = EmpresaSerializer
 
@@ -195,7 +195,7 @@ class ComentarioCreate(generics.CreateAPIView):
 class ComentarioDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comentario.objects.all()
     serializer_class = ComentarioSerializer
-    permission_classes = [ComentarioUserOrReadOnly] # Permite acceso de solo lectura a usuarios no autenticados, pero permite a los usuarios autenticados modificar solo sus propios comentarios
+    permission_classes = [IsComentarioUserOrReadOnly] # Permite acceso de solo lectura a usuarios no autenticados, pero permite a los usuarios autenticados modificar solo sus propios comentarios
 
 # Vistas para Comentario utilizando APIView
 # class ComentarioListAV(APIView):
