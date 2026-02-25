@@ -15,4 +15,4 @@ class IsComentarioUserOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
         else:
-            return obj.comentario_user == request.user
+            return obj.comentario_user == request.user or request.user.is_staff
