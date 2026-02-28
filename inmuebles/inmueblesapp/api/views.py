@@ -14,7 +14,7 @@ from .permissions import IsAdminOrReadOnly, IsComentarioUserOrReadOnly
 # EdificacionesListAV: edificaciones list Api View
 class EdificacionesListAV(APIView): # APIView reconoce los métodos HTTP (get, post, put, delete, etc) por eso no necesita decoradores
     permission_classes = [IsAdminOrReadOnly] # Permite acceso de solo lectura a usuarios no autenticados, pero requiere permisos de administrador para métodos que modifican datos (POST, PUT, DELETE)
-    
+
     def get(self, request) -> Response:
         edificaciones = Edificacion.objects.all()
         serializer = EdificacionSerializer(edificaciones, many=True)
@@ -170,6 +170,7 @@ class ComentarioList(generics.ListCreateAPIView):
 
 class ComentarioCreate(generics.CreateAPIView):
     serializer_class = ComentarioSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return Comentario.objects.all()
