@@ -133,6 +133,7 @@ REST_FRAMEWORK = {
     # ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         # 'rest_framework.authentication.BasicAuthentication', # Permite autenticación básica para acceder a la API
-        'rest_framework.authentication.TokenAuthentication', # Permite autenticación por token para acceder a la API
+        # 'rest_framework.authentication.TokenAuthentication', # Permite autenticación por token para acceder a la API
+        'rest_framework_simplejwt.authentication.JWTAuthentication', # Permite autenticación JWT para acceder a la API
     ]
 }
