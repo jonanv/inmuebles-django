@@ -137,3 +137,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication', # Permite autenticación JWT para acceder a la API
     ]
 }
+
+SIMPLE_JWT = {
+    'ROTATE_REFRESH_TOKENS': True,  # Permite rotar los tokens de refresco para mayor seguridad
+}
