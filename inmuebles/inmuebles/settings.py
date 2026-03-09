@@ -136,10 +136,10 @@ REST_FRAMEWORK = {
         # 'rest_framework.authentication.TokenAuthentication', # Permite autenticación por token para acceder a la API
         'rest_framework_simplejwt.authentication.JWTAuthentication', # Permite autenticación JWT para acceder a la API
     ],
-    'DEFAULT_THROTTLE_CLASSES': [
-        'rest_framework.throttling.AnonRateThrottle', # Limita la cantidad de solicitudes por usuario anónimo
-        'rest_framework.throttling.UserRateThrottle', # Limita la cantidad de solicitudes por usuario
-    ],
+    # 'DEFAULT_THROTTLE_CLASSES': [
+    #     'rest_framework.throttling.AnonRateThrottle', # Limita la cantidad de solicitudes por usuario anónimo
+    #     'rest_framework.throttling.UserRateThrottle', # Limita la cantidad de solicitudes por usuario
+    # ],
     'DEFAULT_THROTTLE_RATES': {
         'anon': '100/day', # Limita a 100 solicitudes por día para usuarios anónimos
         'user': '1000/day', # Limita a 1000 solicitudes por día para usuarios autenticados
