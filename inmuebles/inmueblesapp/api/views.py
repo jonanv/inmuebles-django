@@ -4,6 +4,7 @@ from rest_framework import status, mixins, generics, viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
+from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 
 # Imports
 from ..models import Edificacion, Empresa, Comentario
@@ -201,6 +202,7 @@ class ComentarioDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comentario.objects.all()
     serializer_class = ComentarioSerializer
     permission_classes = [IsComentarioUserOrReadOnly] # Permite acceso de solo lectura a usuarios no autenticados, pero permite a los usuarios autenticados modificar solo sus propios comentarios
+    throttle_classes = [AnonRateThrottle, UserRateThrottle] # Limita la cantidad de solicitudes por usuario anónimo y autenticado, se pueden configurar las tasas en settings.py con DEFAULT_THROTTLE_RATES
 
 # Vistas para Comentario utilizando APIView
 # class ComentarioListAV(APIView):
