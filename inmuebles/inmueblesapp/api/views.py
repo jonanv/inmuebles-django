@@ -5,6 +5,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
+from inmueblesapp.api.throttling import ComentarioCreateThrottle, ComentarioListThrottle
 
 # Imports
 from ..models import Edificacion, Empresa, Comentario
@@ -163,6 +164,7 @@ class ComentarioList(generics.ListCreateAPIView):
     # queryset = Comentario.objects.all()
     serializer_class = ComentarioSerializer
     permission_classes = [IsAuthenticated]
+    throttle_classes = [ComentarioListThrottle] # Limita la cantidad de solicitudes para listar comentarios
 
     def get_queryset(self):
         # Filtrar comentarios por edificacion
@@ -172,6 +174,7 @@ class ComentarioList(generics.ListCreateAPIView):
 class ComentarioCreate(generics.CreateAPIView):
     serializer_class = ComentarioSerializer
     permission_classes = [IsAuthenticated]
+    throttle_classes = [ComentarioCreateThrottle] # Limita la cantidad de solicitudes para crear comentarios
 
     def get_queryset(self):
         return Comentario.objects.all()
