@@ -4,15 +4,19 @@ from rest_framework import status, mixins, generics, viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
+from rest_framework.throttling import AnonRateThrottle, UserRateThrottle, ScopedRateThrottle
+from inmueblesapp.api.throttling import ComentarioCreateThrottle, ComentarioListThrottle
 
 # Imports
 from ..models import Edificacion, Empresa, Comentario
 from .serializers import EdificacionSerializer, EmpresaSerializer, ComentarioSerializer
-from .permissions import AdminOrReadOnly, ComentarioUserOrReadOnly
+from .permissions import IsAdminOrReadOnly, IsComentarioUserOrReadOnly
 
 # COMPONENTS CLASS WITH APIView
 # EdificacionesListAV: edificaciones list Api View
-class EdificacionesListAV(APIView):             # APIView reconoce los métodos HTTP (get, post, put, delete, etc) por eso no necesita decoradores
+class EdificacionesListAV(APIView): # APIView reconoce los métodos HTTP (get, post, put, delete, etc) por eso no necesita decoradores
+    permission_classes = [IsAdminOrReadOnly] # Permite acceso de solo lectura a usuarios no autenticados, pero requiere permisos de administrador para métodos que modifican datos (POST, PUT, DELETE)
+
     def get(self, request) -> Response:
         edificaciones = Edificacion.objects.all()
         serializer = EdificacionSerializer(edificaciones, many=True)
@@ -27,6 +31,8 @@ class EdificacionesListAV(APIView):             # APIView reconoce los métodos 
 
 # EdificacionDetailAV: edificaciones detail Api View
 class EdificacionDetailAV(APIView):
+    permission_classes = [IsAdminOrReadOnly] # Permite acceso de solo lectura a usuarios no autenticados, pero requiere permisos de administrador para métodos que modifican datos (POST, PUT, DELETE)
+
     def get(self, request, pk) -> Response:
         try:
             edificacion = Edificacion.objects.get(pk=pk)
@@ -60,7 +66,7 @@ class EdificacionDetailAV(APIView):
 # Vistas para Empresa utilizando ViewSet, se puede usar con routers para generar automáticamente las rutas, pero no es necesario definir los métodos HTTP, se pueden definir métodos personalizados, reemplaza a EmpresaListAV y EmpresaDetailAV, se comenta estas dos vistas para evitar conflictos con las rutas generadas por el router, si se quieren usar ambas formas de vista, se deben definir rutas diferentes para cada una en urls.py
 class EmpresaListVS(viewsets.ModelViewSet):
     # permission_classes = [IsAuthenticated] # Requiere autenticación para acceder a esta vista
-    permission_classes = [AdminOrReadOnly] # Permite acceso de solo lectura a usuarios no autenticados, pero requiere permisos de administrador para métodos que modifican datos (POST, PUT, DELETE)
+    permission_classes = [IsAdminOrReadOnly] # Permite acceso de solo lectura a usuarios no autenticados, pero requiere permisos de administrador para métodos que modifican datos (POST, PUT, DELETE)
     queryset = Empresa.objects.all()
     serializer_class = EmpresaSerializer
 
@@ -158,6 +164,7 @@ class ComentarioList(generics.ListCreateAPIView):
     # queryset = Comentario.objects.all()
     serializer_class = ComentarioSerializer
     permission_classes = [IsAuthenticated]
+    throttle_classes = [ComentarioListThrottle, AnonRateThrottle] # Limita la cantidad de solicitudes para listar comentarios
 
     def get_queryset(self):
         # Filtrar comentarios por edificacion
@@ -166,6 +173,8 @@ class ComentarioList(generics.ListCreateAPIView):
 
 class ComentarioCreate(generics.CreateAPIView):
     serializer_class = ComentarioSerializer
+    permission_classes = [IsAuthenticated]
+    throttle_classes = [ComentarioCreateThrottle] # Limita la cantidad de solicitudes para crear comentarios
 
     def get_queryset(self):
         return Comentario.objects.all()
@@ -195,7 +204,9 @@ class ComentarioCreate(generics.CreateAPIView):
 class ComentarioDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comentario.objects.all()
     serializer_class = ComentarioSerializer
-    permission_classes = [ComentarioUserOrReadOnly] # Permite acceso de solo lectura a usuarios no autenticados, pero permite a los usuarios autenticados modificar solo sus propios comentarios
+    permission_classes = [IsComentarioUserOrReadOnly] # Permite acceso de solo lectura a usuarios no autenticados, pero permite a los usuarios autenticados modificar solo sus propios comentarios
+    throttle_classes = [ScopedRateThrottle] # Limita la cantidad de solicitudes para obtener, actualizar o eliminar un comentario específico, se puede configurar en settings.py con el scope 'comentario-detail' o similar
+    throttle_scope = 'get-comentario-by-id' # Scope para limitar la cantidad de solicitudes para obtener
 
 # Vistas para Comentario utilizando APIView
 # class ComentarioListAV(APIView):

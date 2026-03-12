@@ -1,0 +1,38 @@
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+# from rest_framework.authtoken.models import Token
+from rest_framework_simplejwt.tokens import RefreshToken
+
+# Imports
+from .serializers import RegistrarSerializer
+
+@api_view(['POST'])
+def registrar_view(request) -> Response:
+    if request.method == 'POST':
+        serializer = RegistrarSerializer(data=request.data)
+        data = {}
+
+        if serializer.is_valid():
+            account = serializer.save()
+            data['response'] = 'Usuario registrado exitosamente.'
+            data['username'] = account.username
+            data['email'] = account.email
+            # token = Token.objects.get(user=account).key
+            # data['token'] = token
+
+            refresh = RefreshToken.for_user(account)
+            data['token'] = {
+                'refresh': str(refresh),
+                'access': str(refresh.access_token)
+            }
+
+            return Response(data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['POST'])
+def logout_view(request) -> Response:
+    if request.method == 'POST':
+        request.user.auth_token.delete()  # Elimina el token del usuario para cerrar sesión
+        return Response({'response': 'Sesión cerrada exitosamente.'}, status=status.HTTP_200_OK)
+    return Response({'error': 'Método no permitido.'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)

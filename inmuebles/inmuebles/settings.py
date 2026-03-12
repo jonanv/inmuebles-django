@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'inmueblesapp',
     'rest_framework',
     'rest_framework.authtoken',
+    'userapp',
 ]
 
 MIDDLEWARE = [
@@ -132,6 +133,22 @@ REST_FRAMEWORK = {
     # ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         # 'rest_framework.authentication.BasicAuthentication', # Permite autenticación básica para acceder a la API
-        'rest_framework.authentication.TokenAuthentication', # Permite autenticación por token para acceder a la API
-    ]
+        # 'rest_framework.authentication.TokenAuthentication', # Permite autenticación por token para acceder a la API
+        'rest_framework_simplejwt.authentication.JWTAuthentication', # Permite autenticación JWT para acceder a la API
+    ],
+    # 'DEFAULT_THROTTLE_CLASSES': [
+    #     'rest_framework.throttling.AnonRateThrottle', # Limita la cantidad de solicitudes por usuario anónimo
+    #     'rest_framework.throttling.UserRateThrottle', # Limita la cantidad de solicitudes por usuario
+    # ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '100/day', # Limita a 100 solicitudes por día para usuarios anónimos
+        'user': '1000/day', # Limita a 1000 solicitudes por día para usuarios autenticados
+        'comentario-create': '2/day', # Limita a 2 solicitudes por día para la creación de comentarios
+        'list-all-comentarios': '8/day', # Limita a 8 solicitudes por día para la lista de comentarios
+        'get-comentario-by-id': '3/day', # Limita a 3 solicitudes por día para obtener, actualizar o eliminar un comentario específico
+    },
+}
+
+SIMPLE_JWT = {
+    'ROTATE_REFRESH_TOKENS': True,  # Permite rotar los tokens de refresco para mayor seguridad
 }
