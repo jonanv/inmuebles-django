@@ -164,7 +164,7 @@ class ComentarioList(generics.ListCreateAPIView):
     # queryset = Comentario.objects.all()
     serializer_class = ComentarioSerializer
     permission_classes = [IsAuthenticated]
-    throttle_classes = [ComentarioListThrottle] # Limita la cantidad de solicitudes para listar comentarios
+    throttle_classes = [ComentarioListThrottle, AnonRateThrottle] # Limita la cantidad de solicitudes para listar comentarios
 
     def get_queryset(self):
         # Filtrar comentarios por edificacion
