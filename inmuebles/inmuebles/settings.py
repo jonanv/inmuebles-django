@@ -145,6 +145,7 @@ REST_FRAMEWORK = {
         'user': '1000/day', # Limita a 1000 solicitudes por día para usuarios autenticados
         'comentario-create': '2/day', # Limita a 2 solicitudes por día para la creación de comentarios
         'list-all-comentarios': '8/day', # Limita a 8 solicitudes por día para la lista de comentarios
+        'get-comentario-by-id': '3/day', # Limita a 3 solicitudes por día para obtener, actualizar o eliminar un comentario específico
     },
 }
 

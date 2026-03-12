@@ -4,7 +4,7 @@ from rest_framework import status, mixins, generics, viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
-from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
+from rest_framework.throttling import AnonRateThrottle, UserRateThrottle, ScopedRateThrottle
 from inmueblesapp.api.throttling import ComentarioCreateThrottle, ComentarioListThrottle
 
 # Imports
@@ -205,7 +205,8 @@ class ComentarioDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comentario.objects.all()
     serializer_class = ComentarioSerializer
     permission_classes = [IsComentarioUserOrReadOnly] # Permite acceso de solo lectura a usuarios no autenticados, pero permite a los usuarios autenticados modificar solo sus propios comentarios
-    throttle_classes = [AnonRateThrottle, UserRateThrottle] # Limita la cantidad de solicitudes por usuario anónimo y autenticado, se pueden configurar las tasas en settings.py con DEFAULT_THROTTLE_RATES
+    throttle_classes = [ScopedRateThrottle] # Limita la cantidad de solicitudes para obtener, actualizar o eliminar un comentario específico, se puede configurar en settings.py con el scope 'comentario-detail' o similar
+    throttle_scope = 'get-comentario-by-id' # Scope para limitar la cantidad de solicitudes para obtener
 
 # Vistas para Comentario utilizando APIView
 # class ComentarioListAV(APIView):
