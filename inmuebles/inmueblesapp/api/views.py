@@ -159,6 +159,14 @@ class EmpresaDetailAV(APIView):
         empresa.delete()
         return Response({'message': 'Empresa eliminada con éxito'}, status=status.HTTP_204_NO_CONTENT)
 
+class UsuarioComentario(generics.ListAPIView):
+    serializer_class = ComentarioSerializer
+
+    def get_queryset(self):
+        # Filtrar comentarios por usuario autenticado
+        username = self.kwargs['username']
+        return Comentario.objects.filter(comentario_user__username=username) # comentario_user es el atributo ForeignKey en el modelo Comentario que hace referencia al usuario que hizo el comentario
+
 # Generic Views pero con ListCreateAPIView, hace lo mismo que el ComentarioListGAV con menos código
 class ComentarioList(generics.ListCreateAPIView):
     # queryset = Comentario.objects.all()
