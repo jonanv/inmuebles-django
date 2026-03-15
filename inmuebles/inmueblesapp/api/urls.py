@@ -19,5 +19,6 @@ urlpatterns = [
     path('edificacion/<int:pk>/comentario-create/', views.ComentarioCreate.as_view(), name='comentario-create'),       # /inmueble/comentario/list/
     path('edificacion/<int:pk>/comentario/', views.ComentarioList.as_view(), name='list-all-comentarios'),       # /inmueble/comentario/list/
     path('edificacion/comentario/<int:pk>', views.ComentarioDetail.as_view(), name='get-comentario-by-id'), # /inmueble/comentario/1
-    path('edificacion/comentarios/<str:username>/', views.UsuarioComentario.as_view(), name='usuario-comentario-detail'), # /inmueble/comentarios/admin/
+    # path('edificacion/comentarios/<str:username>/', views.UsuarioComentario.as_view(), name='usuario-comentario-detail'), # /inmueble/comentarios/juanperez/
+    path('edificacion/comentarios/', views.UsuarioComentario.as_view(), name='usuario-comentario-detail'), # /inmueble/comentarios/?username=juanperez/
 ]

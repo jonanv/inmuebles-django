@@ -162,10 +162,14 @@ class EmpresaDetailAV(APIView):
 class UsuarioComentario(generics.ListAPIView):
     serializer_class = ComentarioSerializer
 
+    # def get_queryset(self):
+    #     # Filtrar comentarios por usuario autenticado
+    #     username = self.kwargs['username']
+    #     return Comentario.objects.filter(comentario_user__username=username) # comentario_user es el atributo ForeignKey en el modelo Comentario que hace referencia al usuario que hizo el comentario
+
     def get_queryset(self):
-        # Filtrar comentarios por usuario autenticado
-        username = self.kwargs['username']
-        return Comentario.objects.filter(comentario_user__username=username) # comentario_user es el atributo ForeignKey en el modelo Comentario que hace referencia al usuario que hizo el comentario
+        username = self.request.query_params.get('username', None) # Obtener el nombre de usuario de los parámetros de consulta
+        return Comentario.objects.filter(comentario_user__username=username) # Filtrar comentarios por nombre de usuario, comentario_user es el atributo ForeignKey en el modelo Comentario que hace referencia al usuario que hizo el comentario
 
 # Generic Views pero con ListCreateAPIView, hace lo mismo que el ComentarioListGAV con menos código
 class ComentarioList(generics.ListCreateAPIView):
