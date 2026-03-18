@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle, ScopedRateThrottle
 from inmueblesapp.api.throttling import ComentarioCreateThrottle, ComentarioListThrottle
+from django_filters.rest_framework import DjangoFilterBackend
 
 # Imports
 from ..models import Edificacion, Empresa, Comentario
@@ -177,6 +178,8 @@ class ComentarioList(generics.ListCreateAPIView):
     serializer_class = ComentarioSerializer
     permission_classes = [IsAuthenticated]
     throttle_classes = [ComentarioListThrottle, AnonRateThrottle] # Limita la cantidad de solicitudes para listar comentarios
+    filter_backends = [DjangoFilterBackend] # Permite filtrar los comentarios por edificacion utilizando el parámetro de consulta ?edificacion=1, donde 1 es el ID de la edificacion
+    filterset_fields = ['comentario_user__username', 'active'] # Permite filtrar los comentarios por nombre de usuario utilizando el parámetro de consulta ?comentario_user__username=juanperez, donde juanperez es el nombre de usuario del usuario que hizo el comentario
 
     def get_queryset(self):
         # Filtrar comentarios por edificacion
