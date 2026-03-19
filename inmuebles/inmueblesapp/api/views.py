@@ -63,6 +63,12 @@ class EdificacionDetailAV(APIView):
         
         edificacion.delete()
         return Response({'message': 'Inmueble eliminado con éxito'}, status=status.HTTP_204_NO_CONTENT)
+    
+class EdificacionList(generics.ListAPIView):
+    queryset = Edificacion.objects.all()
+    serializer_class = EdificacionSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['direccion', 'empresa__nombre']
 
 # Vistas para Empresa utilizando ViewSet, se puede usar con routers para generar automáticamente las rutas, pero no es necesario definir los métodos HTTP, se pueden definir métodos personalizados, reemplaza a EmpresaListAV y EmpresaDetailAV, se comenta estas dos vistas para evitar conflictos con las rutas generadas por el router, si se quieren usar ambas formas de vista, se deben definir rutas diferentes para cada una en urls.py
 class EmpresaListVS(viewsets.ModelViewSet):

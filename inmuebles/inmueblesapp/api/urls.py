@@ -10,6 +10,7 @@ router.register('empresa', views.EmpresaListVS, basename='empresa')
 app_name = 'inmueblesapp'
 urlpatterns = [
     path('edificacion/', views.EdificacionesListAV.as_view(), name='list-all-inmuebles'),                  # /inmueble/list/
+    path('edificacion/list/', views.EdificacionList.as_view(), name='edificacion-list'), # /inmueble/list/?empresa__nombre=Realtor Recover/
     path('edificacion/<int:pk>/', views.EdificacionDetailAV.as_view(), name='get-inmueble-by-id'),              # /inmueble/1/
     
     path('', include(router.urls)),     # Incluye las URLs generadas por el router para EmpresaListVS
