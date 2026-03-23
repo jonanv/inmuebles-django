@@ -14,6 +14,7 @@ class ComentarioSerializer(serializers.ModelSerializer):
 class EdificacionSerializer(serializers.ModelSerializer):  # ModelSerializer hereda de Serializer, por lo que hereda todas sus funcionalidades, se caracteriza por mapear automáticamente los campos del modelo
     # longitud_direccion = serializers.SerializerMethodField()    # Campo adicional que no existe en el modelo, se crea con SerializerMethodField
     comentarios = ComentarioSerializer(many=True, read_only=True)  # Nested Serializer -> Muestra todos los detalles de cada Comentario asociado a la Edificacion
+    empresa_nombre = serializers.CharField(source='empresa.nombre', read_only=True)  # Muestra el nombre de la empresa asociada a la edificacion, source indica de donde se obtiene el valor, en este caso del campo nombre del modelo Empresa relacionado con Edificacion a través del campo empresa, read_only=True indica que este campo es solo de lectura y no se puede modificar al crear o actualizar una Edificacion
 
     class Meta:
         model = Edificacion
