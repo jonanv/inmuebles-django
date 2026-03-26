@@ -5,7 +5,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle, ScopedRateThrottle
-from inmuebles.inmueblesapp.api.pagination import EdificacionPagination
+from inmueblesapp.api.pagination import EdificacionPagination
 from inmueblesapp.api.throttling import ComentarioCreateThrottle, ComentarioListThrottle
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
