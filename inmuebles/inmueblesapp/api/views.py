@@ -71,8 +71,8 @@ class EdificacionList(generics.ListAPIView):
     serializer_class = EdificacionSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter] # Permite buscar edificaciones por dirección utilizando el parámetro de consulta ?search=calle, donde calle es parte de la dirección de la edificacion
     search_fields = ['direccion', 'empresa__nombre']
-    # pagination_class = EdificacionPagination # Permite paginar los resultados de la lista de edificaciones utilizando la clase de paginación personalizada EdificacionPagination definida en pagination.py
-    pagination_class = EfificacionLimitOffsetPagination
+    pagination_class = EdificacionPagination # Permite paginar los resultados de la lista de edificaciones utilizando la clase de paginación personalizada EdificacionPagination definida en pagination.py
+    # pagination_class = EfificacionLimitOffsetPagination
 
 # Vistas para Empresa utilizando ViewSet, se puede usar con routers para generar automáticamente las rutas, pero no es necesario definir los métodos HTTP, se pueden definir métodos personalizados, reemplaza a EmpresaListAV y EmpresaDetailAV, se comenta estas dos vistas para evitar conflictos con las rutas generadas por el router, si se quieren usar ambas formas de vista, se deben definir rutas diferentes para cada una en urls.py
 class EmpresaListVS(viewsets.ModelViewSet):
