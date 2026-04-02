@@ -18,6 +18,10 @@ def registrar_view(request) -> Response:
             data['response'] = 'Usuario registrado exitosamente.'
             data['username'] = account.username
             data['email'] = account.email
+            data['first_name'] = account.first_name
+            data['last_name'] = account.last_name
+            data['phone_number'] = account.phone_number
+            
             # token = Token.objects.get(user=account).key
             # data['token'] = token
 
