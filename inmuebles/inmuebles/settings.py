@@ -75,6 +75,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'inmuebles.wsgi.application'
 
+AUTH_USER_MODEL = 'userapp.Account' # Especifica el modelo de usuario personalizado definido en userapp/models.py, se debe usar este modelo para la autenticación y autorización en lugar del modelo de usuario predeterminado de Django, se debe definir antes de ejecutar las migraciones para crear la tabla de usuarios en la base de datos
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
