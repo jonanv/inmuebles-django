@@ -31,7 +31,7 @@ class MyAccountManager(BaseUserManager):
         return user
     
     def create_superuser(self, first_name, last_name, username, email, password):
-        user = self.model(
+        user = self.create_user(
             email = self.normalize_email(email),
             username = username,
             password = password,
@@ -64,6 +64,8 @@ class Account(AbstractBaseUser):
 
     def get_full_name(self):
         return f'{self.first_name} {self.last_name}'
+    
+    objects = MyAccountManager()
     
     def __str__(self):
         return self.email
