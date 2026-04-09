@@ -7,7 +7,6 @@ from django.contrib import auth
 
 # Imports
 from .serializers import RegistrarSerializer
-from ..models import Account
 
 @api_view(['POST'])
 def registrar_view(request) -> Response:
