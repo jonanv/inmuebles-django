@@ -28,15 +28,16 @@ class RegistrarSerializer(serializers.ModelSerializer):
         #     username = self.validated_data['username']
         # )
 
-        account = Account.objects.create(
+        account = Account.objects.create_user(
             username = self.validated_data['username'],
             email = self.validated_data['email'],
             password = self.validated_data['password'],
             first_name = self.validated_data['first_name'],
             last_name = self.validated_data['last_name'],
-            phone_number = self.validated_data['phone_number']
         )
+        account.set_password = self.validated_data['password'] # Permite encriptar la contraseña antes de guardarla en la base de datos
+        account.phone_number = self.validated_data['phone_number']
 
-        # account.set_password(password)
+        # account.set_password(password) # Permite encriptar la contraseña antes de guardarla en la base de datos
         account.save()
         return account

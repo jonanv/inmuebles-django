@@ -80,10 +80,21 @@ AUTH_USER_MODEL = 'userapp.Account' # Especifica el modelo de usuario personaliz
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'inmueblesdb',
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
@@ -150,6 +161,9 @@ REST_FRAMEWORK = {
         'list-all-comentarios': '8/day', # Limita a 8 solicitudes por día para la lista de comentarios
         'get-comentario-by-id': '3/day', # Limita a 3 solicitudes por día para obtener, actualizar o eliminar un comentario específico
     },
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer', # Devuelve las respuestas de la API en formato JSON
+    ],
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination', # Permite paginar los resultados de las vistas de lista utilizando el formato ?limit=10&offset=20, donde limit es la cantidad de resultados por página y offset es el número de resultados a omitir antes de comenzar a mostrar los resultados
     # 'PAGE_SIZE': 1, # Cantidad de resultados por página
 }
