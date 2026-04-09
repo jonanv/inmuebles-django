@@ -3,9 +3,11 @@ from rest_framework.response import Response
 from rest_framework import status
 # from rest_framework.authtoken.models import Token
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib import auth
 
 # Imports
 from .serializers import RegistrarSerializer
+from ..models import Account
 
 @api_view(['POST'])
 def registrar_view(request) -> Response:
@@ -18,6 +20,10 @@ def registrar_view(request) -> Response:
             data['response'] = 'Usuario registrado exitosamente.'
             data['username'] = account.username
             data['email'] = account.email
+            data['first_name'] = account.first_name
+            data['last_name'] = account.last_name
+            data['phone_number'] = account.phone_number
+
             # token = Token.objects.get(user=account).key
             # data['token'] = token
 
@@ -36,3 +42,29 @@ def logout_view(request) -> Response:
         request.user.auth_token.delete()  # Elimina el token del usuario para cerrar sesión
         return Response({'response': 'Sesión cerrada exitosamente.'}, status=status.HTTP_200_OK)
     return Response({'error': 'Método no permitido.'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+@api_view(['POST'])
+def login_view(request) -> Response:
+    data = {}
+    if request.method == 'POST':
+        email = request.data.get('email')
+        password = request.data.get('password')
+
+    account = auth.authenticate(email=email, password=password)
+
+    if account is not None:
+        data['response'] = 'Inicio de sesión exitoso.'
+        data['username'] = account.username
+        data['email'] = account.email
+        data['first_name'] = account.first_name
+        data['last_name'] = account.last_name
+        data['phone_number'] = account.phone_number
+
+        refresh = RefreshToken.for_user(account)
+        data['token'] = {
+            'refresh': str(refresh),
+            'access': str(refresh.access_token)
+        }
+
+        return Response(data, status=status.HTTP_200_OK)
+    return Response({'error': 'Credenciales incorrectas.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

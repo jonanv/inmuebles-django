@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'userapp',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +75,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'inmuebles.wsgi.application'
 
+AUTH_USER_MODEL = 'userapp.Account' # Especifica el modelo de usuario personalizado definido en userapp/models.py, se debe usar este modelo para la autenticación y autorización en lugar del modelo de usuario predeterminado de Django, se debe definir antes de ejecutar las migraciones para crear la tabla de usuarios en la base de datos
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -147,8 +150,12 @@ REST_FRAMEWORK = {
         'list-all-comentarios': '8/day', # Limita a 8 solicitudes por día para la lista de comentarios
         'get-comentario-by-id': '3/day', # Limita a 3 solicitudes por día para obtener, actualizar o eliminar un comentario específico
     },
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination', # Permite paginar los resultados de las vistas de lista utilizando el formato ?limit=10&offset=20, donde limit es la cantidad de resultados por página y offset es el número de resultados a omitir antes de comenzar a mostrar los resultados
+    # 'PAGE_SIZE': 1, # Cantidad de resultados por página
 }
 
 SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,  # Permite rotar los tokens de refresco para mayor seguridad
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),  # Tiempo de vida del token de acceso
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),  # Tiempo de vida del token de refresco
 }

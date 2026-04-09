@@ -5,7 +5,10 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle, ScopedRateThrottle
+from inmueblesapp.api.pagination import EdificacionPagination, EfificacionLimitOffsetPagination
 from inmueblesapp.api.throttling import ComentarioCreateThrottle, ComentarioListThrottle
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 # Imports
 from ..models import Edificacion, Empresa, Comentario
@@ -62,6 +65,14 @@ class EdificacionDetailAV(APIView):
         
         edificacion.delete()
         return Response({'message': 'Inmueble eliminado con éxito'}, status=status.HTTP_204_NO_CONTENT)
+    
+class EdificacionList(generics.ListAPIView):
+    queryset = Edificacion.objects.all()
+    serializer_class = EdificacionSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter] # Permite buscar edificaciones por dirección utilizando el parámetro de consulta ?search=calle, donde calle es parte de la dirección de la edificacion
+    search_fields = ['direccion', 'empresa__nombre']
+    pagination_class = EdificacionPagination # Permite paginar los resultados de la lista de edificaciones utilizando la clase de paginación personalizada EdificacionPagination definida en pagination.py
+    # pagination_class = EfificacionLimitOffsetPagination
 
 # Vistas para Empresa utilizando ViewSet, se puede usar con routers para generar automáticamente las rutas, pero no es necesario definir los métodos HTTP, se pueden definir métodos personalizados, reemplaza a EmpresaListAV y EmpresaDetailAV, se comenta estas dos vistas para evitar conflictos con las rutas generadas por el router, si se quieren usar ambas formas de vista, se deben definir rutas diferentes para cada una en urls.py
 class EmpresaListVS(viewsets.ModelViewSet):
@@ -159,12 +170,26 @@ class EmpresaDetailAV(APIView):
         empresa.delete()
         return Response({'message': 'Empresa eliminada con éxito'}, status=status.HTTP_204_NO_CONTENT)
 
+class UsuarioComentario(generics.ListAPIView):
+    serializer_class = ComentarioSerializer
+
+    # def get_queryset(self):
+    #     # Filtrar comentarios por usuario autenticado
+    #     username = self.kwargs['username']
+    #     return Comentario.objects.filter(comentario_user__username=username) # comentario_user es el atributo ForeignKey en el modelo Comentario que hace referencia al usuario que hizo el comentario
+
+    def get_queryset(self):
+        username = self.request.query_params.get('username', None) # Obtener el nombre de usuario de los parámetros de consulta
+        return Comentario.objects.filter(comentario_user__username=username) # Filtrar comentarios por nombre de usuario, comentario_user es el atributo ForeignKey en el modelo Comentario que hace referencia al usuario que hizo el comentario
+
 # Generic Views pero con ListCreateAPIView, hace lo mismo que el ComentarioListGAV con menos código
 class ComentarioList(generics.ListCreateAPIView):
     # queryset = Comentario.objects.all()
     serializer_class = ComentarioSerializer
     permission_classes = [IsAuthenticated]
     throttle_classes = [ComentarioListThrottle, AnonRateThrottle] # Limita la cantidad de solicitudes para listar comentarios
+    filter_backends = [DjangoFilterBackend] # Permite filtrar los comentarios por edificacion utilizando el parámetro de consulta ?edificacion=1, donde 1 es el ID de la edificacion
+    filterset_fields = ['comentario_user__username', 'active'] # Permite filtrar los comentarios por nombre de usuario utilizando el parámetro de consulta ?comentario_user__username=juanperez, donde juanperez es el nombre de usuario del usuario que hizo el comentario
 
     def get_queryset(self):
         # Filtrar comentarios por edificacion

@@ -7,6 +7,8 @@ from . import views
 
 urlpatterns = [
     path('login/', obtain_auth_token, name='login'),  # Endpoint para obtener el token de autenticación
+    path('login-app/', views.login_view, name='login-app'),  # Endpoint para iniciar sesión y obtener el token JWT Personalizado
+
     path('registrar/', views.registrar_view, name='registrar'),  # Endpoint para registrar un nuevo usuario
     path('logout/', views.logout_view, name='logout'),  # Endpoint para cerrar sesión (eliminar el token)
     
