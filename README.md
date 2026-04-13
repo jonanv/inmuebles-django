@@ -11,7 +11,7 @@
 - PgAdmin 4 9.2
 - PostgreSQL 18.3
 
-## Frontend
+### Frontend
 - NVM (Node Version Manager) 1.2.2
 - Node 24.13.0
 - npm 11.6.2
@@ -20,5 +20,5 @@
 - Typescript 5.9.3
 - Angular Material 15.2.0
 
-## Clientes API
+### Clientes API
 - Postman 12.7.5
