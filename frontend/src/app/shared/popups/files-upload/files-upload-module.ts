@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Components
-import { FileUpload } from './file-upload';
+import { FilesUpload } from './files-upload';
 
 @NgModule({
   declarations: [
-    FileUpload,
+    FilesUpload,
   ],
   imports: [CommonModule],
 })
-export class FileUploadModule {}
+export class FilesUploadModule {}
