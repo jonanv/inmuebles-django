@@ -18,7 +18,11 @@
 - pnpm 10.28.2
 - Angular 21.1.1
 - Typescript 5.9.3
+- Vite 7.3.2
+- Vitest 4.0.8
 - Angular Material 15.2.0
+- SCSS
+- BEM (Block Element Modifier)
 
 ### Clientes API
 - Postman 12.7.5
