@@ -1,0 +1,12 @@
+@use 'colors';
+@use 'fonts';
+@use 'vendor/index';
+
+html, body {
+  height: 100%;
+  margin: 0 auto;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  background-color: white;
+}
