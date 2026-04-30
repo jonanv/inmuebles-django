@@ -1,6 +1,6 @@
-@use 'colors';
-@use 'fonts';
-@use 'vendor/index';
+@use './colors' as *;
+@use './fonts' as *;
+@use './vendor/index';
 
 html, body {
   height: 100%;
