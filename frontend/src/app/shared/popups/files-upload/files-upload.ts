@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-files-upload',
   standalone: false,
   templateUrl: './files-upload.html',
-  styleUrl: './files-upload.css',
+  styleUrl: './files-upload.scss',
 })
 export class FilesUpload {}

@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-spinner',
   standalone: false,
   templateUrl: './spinner.html',
-  styleUrl: './spinner.css',
+  styleUrl: './spinner.scss',
 })
 export class Spinner {}
