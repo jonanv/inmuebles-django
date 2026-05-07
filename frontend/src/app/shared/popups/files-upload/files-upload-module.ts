@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+// Imports
+import { MatDialogModule } from '@angular/material/dialog';
+
 // Directives
 import { FilesUpload as FilesUploadDirective } from './directives/files-upload';
 
@@ -12,6 +15,12 @@ import { FilesUpload } from './files-upload';
     FilesUpload,
     FilesUploadDirective,
   ],
-  imports: [CommonModule],
+  imports: [
+      CommonModule,
+      MatDialogModule,
+  ],
+  exports: [
+    FilesUploadDirective
+  ]
 })
 export class FilesUploadModule {}
