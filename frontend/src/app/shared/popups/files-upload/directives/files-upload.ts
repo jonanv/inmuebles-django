@@ -1,9 +1,8 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[appFilesUpload]',
+  selector: '[appFilesUploadDirective]',
   standalone: false,
 })
-export class FilesUpload {
-  constructor() {}
+export class FilesUploadDirective {
 }

@@ -5,14 +5,14 @@ import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 
 // Directives
-import { FilesUpload as FilesUploadDirective } from './directives/files-upload';
+import { FilesUploadDirective } from './directives/files-upload';
 
 // Components
-import { FilesUpload } from './files-upload';
+import { FilesUploadComponent } from './files-upload';
 
 @NgModule({
   declarations: [
-    FilesUpload,
+    FilesUploadComponent,
     FilesUploadDirective,
   ],
   imports: [
