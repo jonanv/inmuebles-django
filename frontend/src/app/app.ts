@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 
 // Imports
 import { IndicatorsModule } from './shared/indicators';
+import { PopupsModule } from './shared/popups';
 
 @Component({
   selector: 'app-root',
   imports: [
     CommonModule,
     IndicatorsModule,
+    PopupsModule
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
