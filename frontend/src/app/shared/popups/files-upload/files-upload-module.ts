@@ -9,18 +9,11 @@ import { FilesUploadDirective } from './directives/files-upload';
 
 // Components
 import { FilesUploadComponent } from './files-upload';
+import { DropZone } from './directives/drop-zone';
 
 @NgModule({
-  declarations: [
-    FilesUploadComponent,
-    FilesUploadDirective,
-  ],
-  imports: [
-      CommonModule,
-      MatDialogModule,
-  ],
-  exports: [
-    FilesUploadDirective
-  ]
+  declarations: [FilesUploadComponent, FilesUploadDirective, DropZone],
+  imports: [CommonModule, MatDialogModule],
+  exports: [FilesUploadDirective],
 })
 export class FilesUploadModule {}

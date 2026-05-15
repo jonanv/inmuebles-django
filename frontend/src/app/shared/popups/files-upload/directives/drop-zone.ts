@@ -1,9 +1,9 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[appDropzone]',
+  selector: '[appDropZone]',
   standalone: false,
 })
-export class Dropzone {
+export class DropZone {
   constructor() {}
 }
