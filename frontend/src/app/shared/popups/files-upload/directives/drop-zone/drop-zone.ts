@@ -5,14 +5,15 @@ import { Directive, EventEmitter, HostListener, Output } from '@angular/core';
   standalone: false,
 })
 export class DropZone {
-  @Output() dropped: EventEmitter<FileList[]> = new EventEmitter<FileList[]>();
-  @Output() hovered: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() public dropped: EventEmitter<FileList[]> = new EventEmitter<FileList[]>();
+  @Output() public hovered: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() {}
 
   // Drag and Drop Event Listeners
   // Dejar caer
-  @HostListener('drop', ['$event']) onDrop(event: DragEvent) {
+  @HostListener('drop', ['$event'])
+  public onDrop(event: DragEvent): void {
     event.preventDefault();
     this.hovered.emit(false);
     if (event.dataTransfer?.files) {
@@ -21,13 +22,15 @@ export class DropZone {
   }
 
   // Arrastrar sobre
-  @HostListener('dragover', ['$event']) onDragOver(event: DragEvent) {
+  @HostListener('dragover', ['$event'])
+  public onDragOver(event: DragEvent): void {
     event.preventDefault();
     this.hovered.emit(true);
   }
 
   // Salir del área de arrastre
-  @HostListener('dragleave', ['$event']) onDragLeave(event: DragEvent) {
+  @HostListener('dragleave', ['$event'])
+  public onDragLeave(event: DragEvent): void {
     event.preventDefault();
     this.hovered.emit(false);
   }

@@ -11,14 +11,15 @@ import { FilesUpload as FilesUploadComponent } from '../../files-upload';
   standalone: false,
 })
 export class FilesUpload {
-  @Input() multiple!: boolean;
-  @Input() crop!: boolean;
+  @Input() public multiple!: boolean;
+  @Input() public crop!: boolean;
 
-  @Output() change: EventEmitter<string | string[]> = new EventEmitter<string | string[]>();
+  @Output() public change: EventEmitter<string | string[]> = new EventEmitter<string | string[]>();
 
   constructor(private dialog: MatDialog) {}
 
-  @HostListener('click', ['$event']) onClick(event: Event) {
+  @HostListener('click', ['$event'])
+  public onClick(event: Event): void {
     this.openDialgo();
   }
 
