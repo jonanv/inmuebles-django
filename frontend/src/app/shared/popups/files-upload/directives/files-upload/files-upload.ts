@@ -4,7 +4,7 @@ import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/c
 import { MatDialog } from '@angular/material/dialog';
 
 // Components
-import { FilesUploadComponent } from '../../files-upload';
+import { FilesUpload } from '../../files-upload';
 
 @Directive({
   selector: '[appFilesUploadDirective]',
@@ -23,7 +23,7 @@ export class FilesUploadDirective {
   }
 
   private openDialgo(): void {
-      const dialogRef = this.dialog.open(FilesUploadComponent, {
+      const dialogRef = this.dialog.open(FilesUpload, {
         width: '550px',
         height: '500px',
       });

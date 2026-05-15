@@ -9,11 +9,11 @@ import { FilesUploadDirective } from './directives/files-upload/files-upload';
 import { DropZone as DropZoneDirective } from './directives/drop-zone/drop-zone';
 
 // Components
-import { FilesUploadComponent } from './files-upload';
+import { FilesUpload } from './files-upload';
 
 @NgModule({
   declarations: [
-    FilesUploadComponent,
+    FilesUpload,
     FilesUploadDirective,
     DropZoneDirective
   ],
