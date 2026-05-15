@@ -6,14 +6,24 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 // Directives
 import { FilesUploadDirective } from './directives/files-upload/files-upload';
+import { DropZone as DropZoneDirective } from './directives/drop-zone/drop-zone';
 
 // Components
 import { FilesUploadComponent } from './files-upload';
-import { DropZone } from './directives/drop-zone/drop-zone';
 
 @NgModule({
-  declarations: [FilesUploadComponent, FilesUploadDirective, DropZone],
-  imports: [CommonModule, MatDialogModule],
-  exports: [FilesUploadDirective],
+  declarations: [
+    FilesUploadComponent,
+    FilesUploadDirective,
+    DropZoneDirective
+  ],
+  imports: [
+    CommonModule,
+    MatDialogModule
+  ],
+  exports: [
+    FilesUploadDirective,
+    DropZoneDirective
+  ],
 })
 export class FilesUploadModule {}
