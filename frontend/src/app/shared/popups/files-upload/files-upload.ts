@@ -6,4 +6,10 @@ import { Component } from '@angular/core';
   templateUrl: './files-upload.html',
   styleUrl: './files-upload.scss',
 })
-export class FilesUpload {}
+export class FilesUpload {
+  public isHovering: boolean = false;
+
+  public toggleHovered($event: boolean): void {
+
+  }
+}

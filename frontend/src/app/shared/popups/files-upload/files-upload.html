@@ -4,8 +4,12 @@
   </div>
 
   <div class="files-upload__content">
-    <div class="dropzone"
-      appDropZone>
+    <div
+      class="dropzone"
+      appDropZone
+      (hovered)="toggleHovered($event)"
+      [class.dropzone__hovered]="isHovering"
+    >
       <div class="dropzone__label">Deja tus archivos aquí</div>
       <div class="dropzone__file">
         <label class="file">
