@@ -4,7 +4,7 @@ import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/c
 import { MatDialog } from '@angular/material/dialog';
 
 // Components
-import { FilesUploadComponent } from '../files-upload';
+import { FilesUploadComponent } from '../../files-upload';
 
 @Directive({
   selector: '[appFilesUploadDirective]',
