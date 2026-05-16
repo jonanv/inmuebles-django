@@ -9,6 +9,7 @@
       appDropZone
       (hovered)="toggleHovered($event)"
       [class.dropzone__hovered]="isHovering"
+      (dropped)="onDrop($event)"
     >
       <div class="dropzone__label">Deja tus archivos aquí</div>
       <div class="dropzone__file">
@@ -16,11 +17,19 @@
           <input
             class="file__input"
             type="file"
+            [multiple]="data.multiple"
+            (change)="onDropFile($event)"
           />
           <span class="file__label">Selecciona</span>
         </label>
       </div>
     </div>
+
+    @if (isError) {
+      <div class="error">
+        Seleccione un archivo
+      </div>
+    }
   </div>
 
   <div class="files-upload__footer">
