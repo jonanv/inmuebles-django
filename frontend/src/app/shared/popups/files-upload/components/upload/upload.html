@@ -18,11 +18,17 @@
 
       <div>
         @if (downloadURL) {
-          <span class="upload__success">
+          <div class="upload__success">
             Archivo subido correctamente
-          </span>
+            <a [href]="downloadURL"
+              class="app-a"
+              target="_blank"
+              rel="noopener">
+              Descargar
+            </a>
+          </div>
         } @else {
-          <span class="upload__error">
+          <div class="upload__error">
             <button
               (click)="pause()"
               class="button"
@@ -41,7 +47,7 @@
               [disabled]="snapshot.state !== 'paused'">
               Continuar
             </button>
-          </span>
+          </div>
         }
       </div>
     </div>
