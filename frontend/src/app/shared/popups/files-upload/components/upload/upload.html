@@ -1,1 +1,49 @@
-<p>upload works!</p>
+<div class="upload">
+  {{ file.name }}
+
+  <progress class="upload__progress"
+    [value]="percentage"
+    max="100">
+    {{ percentage }}%
+  </progress>
+
+  @if (isUploading && snapshot) {
+    <div class="upload__info">
+      <div>
+        {{ snapshot.bytesTransferred }}
+        de
+        {{ snapshot.totalBytes }}
+        bytes subidos
+      </div>
+
+      <div>
+        @if (downloadURL) {
+          <span class="upload__success">
+            Archivo subido correctamente
+          </span>
+        } @else {
+          <span class="upload__error">
+            <button
+              (click)="pause()"
+              class="button"
+              [disabled]="snapshot.state !== 'running'">
+              Pausar
+            </button>
+            <button
+              (click)="cancel()"
+              class="button"
+              [disabled]="snapshot.state !== 'running'">
+              Cancelar
+            </button>
+            <button
+              (click)="resume()"
+              class="button"
+              [disabled]="snapshot.state !== 'paused'">
+              Continuar
+            </button>
+          </span>
+        }
+      </div>
+    </div>
+  }
+</div>
