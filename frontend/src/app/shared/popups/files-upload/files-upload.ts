@@ -14,7 +14,7 @@ export interface DialogData {
 })
 export class FilesUpload implements OnInit {
   public isHovering: boolean = false;
-  private files!: File[];
+  public files!: File[];
   private imageFile!: File;
   public isError!: boolean;
   private filesURLs: string[] = [];
@@ -55,5 +55,9 @@ export class FilesUpload implements OnInit {
     }
 
     console.log(files);
+  }
+
+  public onUploadCompleted(url: string): void {
+    this.filesURLs.push(url);
   }
 }
