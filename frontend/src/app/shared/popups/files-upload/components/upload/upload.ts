@@ -11,7 +11,7 @@ import { Storage, ref, uploadBytesResumable, getDownloadURL, UploadTaskSnapshot,
 })
 export class Upload implements OnInit {
   @Input() public file!: File;
-  @Output() public complete: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public completed: EventEmitter<string> = new EventEmitter<string>();
 
   public percentage: number = 0;
   public isUploading = false;
@@ -57,7 +57,7 @@ export class Upload implements OnInit {
         this.isUploaded = true;
 
         const downloadURL = await getDownloadURL(this.task.snapshot.ref);
-        this.complete.next(downloadURL);
+        this.completed.next(downloadURL);
       }
     );
   }
