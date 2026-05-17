@@ -1,8 +1,7 @@
-import { Component, OnInit, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 
 // Imports
-import { Storage, ref, uploadBytesResumable, getDownloadURL, UploadTaskSnapshot } from '@angular/fire/storage';
-import { Subject } from 'rxjs';
+import { Storage, ref, uploadBytesResumable, getDownloadURL, UploadTaskSnapshot, UploadTask } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-upload',
@@ -10,12 +9,18 @@ import { Subject } from 'rxjs';
   templateUrl: './upload.html',
   styleUrl: './upload.scss',
 })
-export class Upload implements OnInit, OnDestroy {
+export class Upload implements OnInit {
   @Input() public file!: File;
   @Output() public complete: EventEmitter<string> = new EventEmitter<string>();
 
-  private percentage: number = 0;
-  private destroy$: Subject<void> = new Subject<void>();
+  public percentage: number = 0;
+  public isUploading = false;
+  public isUploaded = false;
+  public downloadURL: string | null = null;
+
+  public snapshot: UploadTaskSnapshot | null = null;
+
+  public task!: UploadTask;
 
   constructor(
     private storage: Storage
@@ -29,32 +34,43 @@ export class Upload implements OnInit, OnDestroy {
     this.startUploading();
   }
 
-  public ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
   public async startUploading(): Promise<void> {
     const path = `${ this.file.type.split('/')[0] }/${ Date.now() }_${ this.file.name }`;
 
     const storageRef = ref(this.storage, path);
 
-    const uploadTask = uploadBytesResumable(storageRef, this.file);
+    this.task = uploadBytesResumable(storageRef, this.file);
 
-    uploadTask.on(
+    this.isUploading = true;
+
+    this.task.on(
       'state_changed',
       (snapshot: UploadTaskSnapshot) => {
         this.percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       },
       (error) => {
         console.error('Upload failed:', error);
+        this.isUploading = false;
       },
       async () => {
-        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+        this.isUploading = false;
+        this.isUploaded = true;
+
+        const downloadURL = await getDownloadURL(this.task.snapshot.ref);
         this.complete.next(downloadURL);
       }
     );
+  }
+
+  public pause(): void {
+    this.task?.pause();
+  }
+
+  public resume(): void {
+    this.task?.resume();
+  }
+
+  public cancel(): void {
+    this.task?.cancel();
   }
 }
