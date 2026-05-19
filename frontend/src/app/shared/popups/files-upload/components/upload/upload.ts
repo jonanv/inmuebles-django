@@ -1,7 +1,4 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-
-// Imports
-import { Storage, ref, uploadBytesResumable, getDownloadURL, UploadTaskSnapshot, UploadTask } from '@angular/fire/storage';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-upload',
@@ -14,19 +11,19 @@ export class Upload implements OnInit {
   @Output() public completed: EventEmitter<string> = new EventEmitter<string>();
 
   public percentage: number = 0;
-  public isUploading = false;
-  public isUploaded = false;
+  public isUploading: boolean = false;
+  public isUploaded: boolean = false;
+  public isPaused: boolean = false;
+  public isCancelled: boolean = false;
+
   public downloadURL: string | null = null;
 
-  public snapshot: UploadTaskSnapshot | null = null;
+  public bytesTransferred: number = 0;
+  public totalBytes: number = 0;
 
-  public task!: UploadTask;
+  private interval!: ReturnType<typeof setInterval>;
 
-  constructor(
-    private storage: Storage
-  ) {
-
-  }
+  constructor() {}
 
   public ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -34,43 +31,63 @@ export class Upload implements OnInit {
     this.startUploading();
   }
 
-  public async startUploading(): Promise<void> {
-    const path = `${ this.file.type.split('/')[0] }/${ Date.now() }_${ this.file.name }`;
-
-    const storageRef = ref(this.storage, path);
-
-    this.task = uploadBytesResumable(storageRef, this.file);
-
+  public startUploading(): void {
     this.isUploading = true;
+    this.isUploaded = false;
+    this.isCancelled = false;
 
-    this.task.on(
-      'state_changed',
-      (snapshot: UploadTaskSnapshot) => {
-        this.percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      },
-      (error) => {
-        console.error('Upload failed:', error);
-        this.isUploading = false;
-      },
-      async () => {
+    this.totalBytes = this.file.size;
+
+    this.interval = setInterval(() => {
+      if (this.isPaused || this.isCancelled) {
+        return;
+      }
+
+      if (this.bytesTransferred >= this.totalBytes) {
+        this.bytesTransferred = this.totalBytes;
+        this.percentage = 100;
+
+        clearInterval(this.interval);
+
         this.isUploading = false;
         this.isUploaded = true;
 
-        const downloadURL = await getDownloadURL(this.task.snapshot.ref);
-        this.completed.next(downloadURL);
+        this.downloadURL = URL.createObjectURL(this.file);
+        this.completed.next(this.downloadURL);
+        return;
       }
-    );
+
+      const increment = Math.floor(
+        Math.random() * (this.totalBytes * 0.08)
+      );
+
+      this.bytesTransferred += increment;
+
+      if (this.bytesTransferred > this.totalBytes) {
+        this.bytesTransferred = this.totalBytes;
+      }
+
+      this.percentage = Math.floor(
+        (this.bytesTransferred / this.totalBytes) * 100
+      );
+    }, 500);
   }
 
   public pause(): void {
-    this.task?.pause();
+    this.isPaused = true;
   }
 
   public resume(): void {
-    this.task?.resume();
+    this.isPaused = false;
   }
 
   public cancel(): void {
-    this.task?.cancel();
+    this.isCancelled = true;
+    this.isUploading = false;
+
+    clearInterval(this.interval);
+
+    this.percentage = 0;
+    this.bytesTransferred = 0;
   }
 }

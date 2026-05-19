@@ -1,55 +1,56 @@
 <div class="upload">
   {{ file.name }}
 
-  <progress class="upload__progress"
+  <progress
+    class="upload__progress"
     [value]="percentage"
     max="100">
     {{ percentage }}%
   </progress>
 
-  @if (isUploading && snapshot) {
-    <div class="upload__info">
-      <div>
-        {{ snapshot.bytesTransferred }}
-        de
-        {{ snapshot.totalBytes }}
-        bytes subidos
-      </div>
-
-      <div>
-        @if (downloadURL) {
-          <div class="upload__success">
-            Archivo subido correctamente
-            <a [href]="downloadURL"
-              class="app-a"
-              target="_blank"
-              rel="noopener">
-              Descargar
-            </a>
-          </div>
-        } @else {
-          <div class="upload__error">
-            <button
-              (click)="pause()"
-              class="button"
-              [disabled]="snapshot.state !== 'running'">
-              Pausar
-            </button>
-            <button
-              (click)="cancel()"
-              class="button"
-              [disabled]="snapshot.state !== 'running'">
-              Cancelar
-            </button>
-            <button
-              (click)="resume()"
-              class="button"
-              [disabled]="snapshot.state !== 'paused'">
-              Continuar
-            </button>
-          </div>
-        }
-      </div>
+  <div class="upload__info">
+    <div>
+      {{ bytesTransferred }} de {{ totalBytes }} bytes subidos
     </div>
-  }
+
+    <div>
+      @if (isUploaded && downloadURL) {
+        <div class="upload__success">
+          Archivo subido correctamente
+          <a
+            [href]="downloadURL"
+            class="app-a"
+            target="_blank"
+            rel="noopener">
+            Descargar
+          </a>
+        </div>
+      } @else if (isUploading) {
+        <div class="upload__error">
+
+          <button
+            (click)="pause()"
+            class="button"
+            [disabled]="isPaused">
+            Pausar
+          </button>
+
+          <button
+            (click)="cancel()"
+            class="button">
+            Cancelar
+          </button>
+
+          <button
+            (click)="resume()"
+            class="button"
+            [disabled]="!isPaused">
+            Continuar
+          </button>
+
+        </div>
+      }
+    </div>
+  </div>
+
 </div>
