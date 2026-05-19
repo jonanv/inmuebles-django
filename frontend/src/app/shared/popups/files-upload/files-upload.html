@@ -45,6 +45,17 @@
   </div>
 
   <div class="files-upload__footer">
-
+    <button
+      class="app-button"
+      (click)="onClose()">
+      Cerrar
+    </button>
+    @if (filesURLs.length) {
+      <button
+        class="app-button"
+        (click)="onCompleted()">
+        Completado
+      </button>
+    }
   </div>
 </div>

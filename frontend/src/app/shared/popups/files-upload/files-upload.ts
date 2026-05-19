@@ -17,7 +17,7 @@ export class FilesUpload implements OnInit {
   public files!: File[];
   private imageFile!: File;
   public isError!: boolean;
-  private filesURLs: string[] = [];
+  public filesURLs: string[] = [];
 
   constructor(
     private dialogRef: MatDialogRef<FilesUpload>,
@@ -59,5 +59,14 @@ export class FilesUpload implements OnInit {
 
   public onUploadCompleted(url: string): void {
     this.filesURLs.push(url);
+  }
+
+  public onClose(): void {
+    this.dialogRef.close(this.filesURLs);
+  }
+
+  public onCompleted(): void {
+    const response = this.data.multiple ? this.filesURLs : this.filesURLs[0];
+    this.dialogRef.close(response);
   }
 }
