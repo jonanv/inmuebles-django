@@ -8,6 +8,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FilesUpload as FilesUploadDirective } from './directives/files-upload/files-upload';
 import { DropZone as DropZoneDirective } from './directives/drop-zone/drop-zone';
 
+// Pipes
+import { FileSizePipe } from './pipes/file-size/file-size-pipe';
+
 // Components
 import { FilesUpload } from './files-upload';
 import { Upload } from './components/upload/upload';
@@ -17,7 +20,8 @@ import { Upload } from './components/upload/upload';
     FilesUpload,
     FilesUploadDirective,
     DropZoneDirective,
-    Upload
+    Upload,
+    FileSizePipe
   ],
   imports: [
     CommonModule,
