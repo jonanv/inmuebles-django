@@ -10,6 +10,7 @@
 <button
   appFilesUpload
   [multiple]="true"
+  (changed)="onFilesChanged($event)"
 >
   Subir imagenes al servidor
 </button>

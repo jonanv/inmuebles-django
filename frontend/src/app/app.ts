@@ -23,4 +23,8 @@ export class App {
   public onToggleSpinner(): void {
     this.showSpinner = !this.showSpinner;
   }
+
+  public onFilesChanged(urls: string | string[]): void {
+    console.log('urls:', urls);
+  }
 }
