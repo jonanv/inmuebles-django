@@ -14,7 +14,7 @@ export class FilesUpload {
   @Input() public multiple!: boolean;
   @Input() public crop!: boolean;
 
-  @Output() public change: EventEmitter<string | string[]> = new EventEmitter<string | string[]>();
+  @Output() public changed: EventEmitter<string | string[]> = new EventEmitter<string | string[]>();
 
   constructor(private dialog: MatDialog) {}
 
@@ -34,7 +34,7 @@ export class FilesUpload {
       });
 
       dialogRef.afterClosed().subscribe((result: any) => {
-        this.change.emit(result || null);
+        this.changed.emit(result || null);
       });
   }
 }
