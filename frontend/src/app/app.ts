@@ -12,6 +12,9 @@ import { Notification as NotificationService } from './services';
 
 // Imports
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +25,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     PopupsModule,
     NotificationModule,
     MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule
 ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
