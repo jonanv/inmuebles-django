@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Imports
@@ -22,4 +22,10 @@ import { FlexLayoutModule } from '@ngbracket/ngx-layout';
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
-export class Header {}
+export class Header {
+  @Output() public menuToogle: EventEmitter<void> = new EventEmitter<void>();
+
+  public onMenuToggle(): void {
+    this.menuToogle.emit();
+  }
+}
