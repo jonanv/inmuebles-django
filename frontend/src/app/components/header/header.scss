@@ -1,7 +1,9 @@
 @use '../../../styles/fonts' as *;
+@use '../../../styles/colors' as *;
+@use '../../../styles/vendor';
 
 mat-toolbar {
-  background-color: purple;
+  background-color: $primary-color;
   font-family: $base-font-family;
 }
 
