@@ -17,7 +17,7 @@ import { PopupsModule } from './shared/popups';
 import { Notification as NotificationService } from './services';
 
 // Components
-import { Header } from './components';
+import { Header, MenuList } from './components';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +31,8 @@ import { Header } from './components';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    Header
+    Header,
+    MenuList
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'

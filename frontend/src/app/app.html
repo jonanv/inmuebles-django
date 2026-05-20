@@ -2,6 +2,10 @@
   <mat-sidenav
     #menu>
     <p>Elemento Sidenav</p>
+
+    <app-menu-list
+      (menuToogle)="menu.toggle()">
+    </app-menu-list>
   </mat-sidenav>
 
   <mat-sidenav-content>
