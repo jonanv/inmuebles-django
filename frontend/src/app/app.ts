@@ -1,34 +1,11 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from "@angular/router";
-
-// Imports
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-
-// Modules
-import { NotificationModule } from './services';
-import { IndicatorsModule } from './shared/indicators';
-import { PopupsModule } from './shared/popups';
 
 // Services
 import { Notification as NotificationService } from './services';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    IndicatorsModule,
-    PopupsModule,
-    NotificationModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-],
+  standalone: false,
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
