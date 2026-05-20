@@ -1,5 +1,8 @@
+@use '../styles/fonts' as *;
+
 mat-sidenav-container, mat-sidenav-content, mat-sidenav, mat-nav-list {
   height: 100vh;
+  font-family: $base-font-family;
 }
 
 mat-sidenav {
