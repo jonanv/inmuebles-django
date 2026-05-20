@@ -2,6 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from "@angular/router";
 
+// Imports
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+
 // Modules
 import { NotificationModule } from './services';
 import { IndicatorsModule } from './shared/indicators';
@@ -9,12 +15,6 @@ import { PopupsModule } from './shared/popups';
 
 // Services
 import { Notification as NotificationService } from './services';
-
-// Imports
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +27,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
 ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
