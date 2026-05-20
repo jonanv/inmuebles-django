@@ -1,26 +1,15 @@
-<button
-  (click)="onToggleSpinner()">
-  Toggle Spinner
-</button>
+<mat-sidenav-container>
+  <mat-sidenav
+    #menu>
+    <p>Elemento Sidenav</p>
+  </mat-sidenav>
 
-@if (showSpinner) {
-  <app-spinner />
-}
+  <mat-sidenav-content>
+    <button
+      (click)="menu.toggle()">
+      Abrir menu
+    </button>
 
-<button
-  appFilesUpload
-  [multiple]="true"
-  (changed)="onFilesChanged($event)"
->
-  Subir imagenes al servidor
-</button>
-
-<button
-  (click)="onError()">
-  Error
-</button>
-
-<button
-  (click)="onSuccess()">
-  Success
-</button>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

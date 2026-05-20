@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterOutlet } from "@angular/router";
 
 // Modules
 import { NotificationModule } from './services';
@@ -9,14 +10,19 @@ import { PopupsModule } from './shared/popups';
 // Services
 import { Notification as NotificationService } from './services';
 
+// Imports
+import { MatSidenavModule } from '@angular/material/sidenav';
+
 @Component({
   selector: 'app-root',
   imports: [
     CommonModule,
+    RouterOutlet,
     IndicatorsModule,
     PopupsModule,
-    NotificationModule
-  ],
+    NotificationModule,
+    MatSidenavModule,
+],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
