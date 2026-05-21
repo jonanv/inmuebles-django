@@ -5,7 +5,12 @@ import { WelcomeRoutingModule } from './welcome-routing-module';
 import { Welcome } from './welcome';
 
 @NgModule({
-  declarations: [Welcome],
-  imports: [CommonModule, WelcomeRoutingModule],
+  declarations: [
+    Welcome
+  ],
+  imports: [
+    CommonModule,
+    WelcomeRoutingModule
+  ],
 })
 export class WelcomeModule {}
