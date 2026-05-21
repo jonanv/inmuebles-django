@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 // Imports
 import { MatListModule } from '@angular/material/list';
@@ -9,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
   selector: 'app-menu-list',
   imports: [
     CommonModule,
-
+    RouterModule,
     MatListModule,
     MatIconModule
   ],

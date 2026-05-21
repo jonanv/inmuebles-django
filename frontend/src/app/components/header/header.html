@@ -17,9 +17,27 @@
       class="navegation-menu"
       fxLayout="row"
       fxLayoutGap="10px">
-      <li><a href="">Registrar</a></li>
-      <li><a href="">Login</a></li>
-      <li><a href="">Home</a></li>
+      <li>
+        <a
+          routerLink="/auth/registration"
+          routerLinkActive="link-activate">
+          Registrar
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/auth/login"
+          routerLinkActive="link-activate">
+          Login
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/"
+          routerLinkActive="link-activate">
+          Home
+        </a>
+      </li>
     </ul>
   </div>
 </mat-toolbar>

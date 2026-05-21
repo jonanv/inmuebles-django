@@ -10,7 +10,9 @@
 
   <a
     mat-list-item
-    (click)="onCloseMenu()">
+    (click)="onCloseMenu()"
+    routerLink="/auth/login"
+    routerLinkActive="link-activate">
     <mat-icon>login</mat-icon>
     <span class="navegation-list-label">
       Inicio Sesion
@@ -19,7 +21,9 @@
 
   <a
     mat-list-item
-    (click)="onCloseMenu()">
+    (click)="onCloseMenu()"
+    routerLink="/auth/registration"
+    routerLinkActive="link-activate">
     <mat-icon>how_to_register</mat-icon>
     <span class="navegation-list-label">
       Registrar
@@ -28,7 +32,9 @@
 
   <a
     mat-list-item
-    (click)="onCloseMenu()">
+    (click)="onCloseMenu()"
+    routerLink="/auth/contact"
+    routerLinkActive="link-activate">
     <mat-icon>contact_support</mat-icon>
     <span class="navegation-list-label">
       Contacto
@@ -37,7 +43,9 @@
 
   <a
     mat-list-item
-    (click)="onCloseMenu()">
+    (click)="onCloseMenu()"
+    routerLink="/auth/new-product"
+    routerLinkActive="link-activate">
     <mat-icon>add</mat-icon>
     <span class="navegation-list-label">
       Nuevo Producto
@@ -46,7 +54,9 @@
 
   <a
     mat-list-item
-    (click)="onCloseMenu()">
+    (click)="onCloseMenu()"
+    routerLink="/auth/logout"
+    routerLinkActive="link-activate">
     <mat-icon>logout</mat-icon>
     <span class="navegation-list-label">
       Cerrar Sesion
