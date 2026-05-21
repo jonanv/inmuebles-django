@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+// Imports
+import { MatCardModule } from '@angular/material/card';
+
+// Routing
 import { NotFoundRoutingModule } from './not-found-routing-module';
+
+// Components
 import { NotFound } from './not-found';
 
 @NgModule({
@@ -10,7 +16,8 @@ import { NotFound } from './not-found';
   ],
   imports: [
     CommonModule,
-    NotFoundRoutingModule
+    NotFoundRoutingModule,
+    MatCardModule
   ],
 })
 export class NotFoundModule {}
