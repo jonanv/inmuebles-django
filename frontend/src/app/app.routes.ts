@@ -5,6 +5,20 @@ export const routes: Routes = [
     path: '',
     children: [
       {
+        path: 'auth',
+        loadChildren: () => import('./pages/auth/auth-module').then(m => m.AuthModule)
+      },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'auth/login'
+      }
+    ]
+  },
+  {
+    path: '',
+    children: [
+      {
         path: 'static',
         loadChildren: () => import('./pages/static/static-module').then(m => m.StaticModule)
       },
