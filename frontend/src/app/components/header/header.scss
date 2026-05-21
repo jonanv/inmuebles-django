@@ -5,6 +5,11 @@
 mat-toolbar {
   background-color: $primary-color;
   font-family: $base-font-family;
+  color: $primary-color-on-text;
+
+  button {
+    color: $primary-color-on-text;
+  }
 }
 
 .navegation-menu {
