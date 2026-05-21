@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -6,4 +7,13 @@ import { Component } from '@angular/core';
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
-export class Login {}
+export class Login {
+
+  constructor(
+
+  ) {}
+
+  public onLogin(form: NgForm): void {
+
+  }
+}
