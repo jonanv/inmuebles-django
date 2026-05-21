@@ -9,5 +9,6 @@ export const environment = {
     storageBucket: 'TU_BUCKET',
     messagingSenderId: 'TU_SENDER_ID',
     appId: 'TU_APP_ID'
-  }
+  },
+  url: 'URL_DE_TU_API'
 };
