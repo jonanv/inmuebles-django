@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-registration',
@@ -6,4 +7,11 @@ import { Component } from '@angular/core';
   templateUrl: './registration.html',
   styleUrl: './registration.scss',
 })
-export class Registration {}
+export class Registration {
+
+  constructor() {}
+
+  public onRegistration(form: NgForm): void {
+
+  }
+}
