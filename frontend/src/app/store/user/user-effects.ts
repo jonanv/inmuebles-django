@@ -79,7 +79,8 @@ export class UserEffects {
               'token',
               response.token.access
             );
-            this.router.navigate(['/']);
+            console.log('LOGIN RESPONSE:', response);
+            this.router.navigate(['/static/welcome']);
           }),
 
           map((response: UserResponse) =>

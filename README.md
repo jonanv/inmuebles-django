@@ -23,6 +23,7 @@
 - Angular Material 15.2.0
 - SCSS
 - BEM (Block Element Modifier)
+- RxJS 21.1.1
 
 ### Clientes API
 - Postman 12.7.5
