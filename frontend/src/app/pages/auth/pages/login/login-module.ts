@@ -15,6 +15,7 @@ import { LoginRoutingModule } from './login-routing-module';
 
 // Components
 import { Login } from './login';
+import { IndicatorsModule, SpinnerModule } from "../../../../shared";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import { Login } from './login';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    FlexLayoutModule
-  ],
+    FlexLayoutModule,
+    IndicatorsModule,
+    SpinnerModule
+],
 })
 export class LoginModule {}

@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
+// Imports
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { EmailPasswordCredentials } from '../../../../store/user/user-models';
+import * as fromUser from '../../../../store/user/user-actions';
+
 @Component({
   selector: 'app-login',
   standalone: false,
@@ -9,11 +15,26 @@ import { NgForm } from '@angular/forms';
 })
 export class Login {
 
-  constructor(
+  public loading$!: Observable<boolean | null>;
 
+  constructor(
+    private store: Store
   ) {}
 
   public onLogin(form: NgForm): void {
 
+    const userLoginRequest: EmailPasswordCredentials = {
+
+      email: form.value.email,
+      password: form.value.password
+
+    };
+
+    this.store.dispatch(
+      fromUser.signInEmail({
+        credentials: userLoginRequest
+      })
+    );
   }
+
 }
