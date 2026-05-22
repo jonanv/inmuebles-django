@@ -114,11 +114,11 @@ export class UserEffects {
       switchMap((token) => {
         if (token) {
           return this.httpClient.get<UserResponse>(
-            `${ environment.url }account/login/`
+            `${ environment.url }account/session/`
           ).pipe(
             tap((response: UserResponse) => {
               console.log(
-                'Data del usurio que viene del servidor',
+                'Data del usuario que viene del servidor',
                 response
               );
             }),
