@@ -1,5 +1,6 @@
-import { UserResponse } from './user-models';
+import { createReducer, on } from '@ngrx/store';
 import * as fromActions from './user-actions';
+import { UserResponse } from './user-models';
 
 export interface UserState {
   entity: UserResponse | null;
@@ -13,135 +14,107 @@ const initialState: UserState = {
   id: null,
   loading: null,
   error: null
-}
+};
 
-export function reducer(state = initialState, action: fromActions.Types | any): UserState {
-  switch (action.type) {
-    // init
-    case fromActions.Types.INIT: {
-      return {
-        ...state,
-        loading: true
-      }
-    };
+export const reducer = createReducer(
 
-    case fromActions.Types.INIT_AUTHORIZED: {
-      return {
-        ...state,
-        loading: false,
-        entity: action.user,
-        id: action.id,
-        error: null
-      }
-    };
+  initialState,
 
-    case fromActions.Types.INIT_UNAUTHORIZED: {
-      return {
-        ...state,
-        loading: false,
-        entity: null,
-        id: null,
-        error: null
-      }
-    };
+  // init
+  on(fromActions.init, (state) => ({
+    ...state,
+    loading: true
+  })),
 
-    case fromActions.Types.INIT_ERROR: {
-      return {
-        ...state,
-        loading: false,
-        entity: null,
-        id: null,
-        error: action.error
-      }
-    };
+  on(fromActions.initAuthorized, (state, action) => ({
+    ...state,
+    loading: false,
+    entity: action.user,
+    id: action.email,
+    error: null
+  })),
 
-    // login
-    case fromActions.Types.SIGIN_IN_EMAIL: {
-      return {
-        ...state,
-        loading: true,
-        entity: null,
-        id: null,
-        error: null
-      }
-    };
+  on(fromActions.initUnauthorized, (state) => ({
+    ...state,
+    loading: false,
+    entity: null,
+    id: null,
+    error: null
+  })),
 
-    case fromActions.Types.SIGIN_IN_EMAIL_SUCCESS: {
-      return {
-        ...state,
-        loading: false,
-        entity: action.user,
-        id: action.id,
-        error: null
-      }
-    };
+  on(fromActions.initError, (state, action) => ({
+    ...state,
+    loading: false,
+    entity: null,
+    id: null,
+    error: action.error
+  })),
 
-    case fromActions.Types.SIGIN_IN_EMAIL_ERROR: {
-      return {
-        ...state,
-        loading: false,
-        entity: null,
-        id: null,
-        error: action.error
-      }
-    };
+  // login
+  on(fromActions.signInEmail, (state) => ({
+    ...state,
+    loading: true,
+    entity: null,
+    id: null,
+    error: null
+  })),
 
-    // Registro de usuarios
-    case fromActions.Types.SIGIN_UP_EMAIL: {
-      return {
-        ...state,
-        loading: true,
-        entity: null,
-        id: null,
-        error: null
-      }
-    };
+  on(fromActions.signInEmailSuccess, (state, action) => ({
+    ...state,
+    loading: false,
+    entity: action.user,
+    id: action.email,
+    error: null
+  })),
 
-    case fromActions.Types.SIGIN_UP_EMAIL_SUCCESS: {
-      return {
-        ...state,
-        loading: false,
-        entity: action.user,
-        id: action.id,
-        error: null
-      }
-    };
+  on(fromActions.signInEmailError, (state, action) => ({
+    ...state,
+    loading: false,
+    entity: null,
+    id: null,
+    error: action.error
+  })),
 
-    case fromActions.Types.SIGIN_UP_EMAIL_ERROR: {
-      return {
-        ...state,
-        loading: false,
-        entity: null,
-        id: null,
-        error: action.error
-      }
-    };
+  // Registro
+  on(fromActions.signUpEmail, (state) => ({
+    ...state,
+    loading: true,
+    entity: null,
+    id: null,
+    error: null
+  })),
 
-    // Logout
-    case fromActions.Types.SIGIN_OUT_EMAIL: {
-      return {
-        ...initialState
-      }
-    };
+  on(fromActions.signUpEmailSuccess, (state, action) => ({
+    ...state,
+    loading: false,
+    entity: action.user,
+    id: action.email,
+    error: null
+  })),
 
-    case fromActions.Types.SIGIN_OUT_EMAIL_SUCCESS: {
-      return {
-        ...initialState
-      }
-    };
+  on(fromActions.signUpEmailError, (state, action) => ({
+    ...state,
+    loading: false,
+    entity: null,
+    id: null,
+    error: action.error
+  })),
 
-    case fromActions.Types.SIGIN_OUT_EMAIL_ERROR: {
-      return {
-        ...state,
-        loading: false,
-        entity: null,
-        id: null,
-        error: action.error
-      }
-    };
+  // Logout
+  on(fromActions.signOutEmail, () => ({
+    ...initialState
+  })),
 
-    default: {
-      return state;
-    }
-  }
-}
+  on(fromActions.signOutEmailSuccess, () => ({
+    ...initialState
+  })),
+
+  on(fromActions.signOutEmailError, (state, action) => ({
+    ...state,
+    loading: false,
+    entity: null,
+    id: null,
+    error: action.error
+  }))
+
+);

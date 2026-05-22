@@ -1,21 +1,68 @@
-import { Action } from '@ngrx/store';
-import { EmailPasswordCredentials, UserCreateRequest, UserResponse } from './user-models';
+import { createAction, props } from '@ngrx/store';
 
-export enum Types {
-  INIT = '[User] Init: Start',
-  INIT_AUTHORIZED = '[User] Init Authorized',
-  INIT_UNAUTHORIZED = '[User] Init Unauthorized',
-  INIT_ERROR = '[User] Init Error',
+import {
+  EmailPasswordCredentials,
+  UserCreateRequest,
+  UserResponse
+} from './user-models';
 
-  SIGIN_IN_EMAIL = '[User] Login: Start',
-  SIGIN_IN_EMAIL_SUCCESS = '[User] Login: Success',
-  SIGIN_IN_EMAIL_ERROR = '[User] Login: Error',
+export const init = createAction(
+  '[User] Init: Start'
+);
 
-  SIGIN_UP_EMAIL = '[User] Sign Up con email: Start',
-  SIGIN_UP_EMAIL_SUCCESS = '[User] Sign Up con email: Success',
-  SIGIN_UP_EMAIL_ERROR = '[User] Sign Up con email: Error',
+export const initAuthorized = createAction(
+  '[User] Init Authorized',
+  props<{ email: string; user: UserResponse | null }>()
+);
 
-  SIGIN_OUT_EMAIL = '[User] Logout: Start',
-  SIGIN_OUT_EMAIL_SUCCESS = '[User] Logout: Success',
-  SIGIN_OUT_EMAIL_ERROR = '[User] Logout: Error',
-}
+export const initUnauthorized = createAction(
+  '[User] Init Unauthorized'
+);
+
+export const initError = createAction(
+  '[User] Init Error',
+  props<{ error: string }>()
+);
+
+export const signInEmail = createAction(
+  '[User] Login: Start',
+  props<{ credentials: EmailPasswordCredentials }>()
+);
+
+export const signInEmailSuccess = createAction(
+  '[User] Login: Success',
+  props<{ email: string; user: UserResponse | null }>()
+);
+
+export const signInEmailError = createAction(
+  '[User] Login: Error',
+  props<{ error: string }>()
+);
+
+export const signUpEmail = createAction(
+  '[User] Sign Up con email: Start',
+  props<{ user: UserCreateRequest }>()
+);
+
+export const signUpEmailSuccess = createAction(
+  '[User] Sign Up con email: Success',
+  props<{ email: string; user: UserResponse | null }>()
+);
+
+export const signUpEmailError = createAction(
+  '[User] Sign Up con email: Error',
+  props<{ error: string }>()
+);
+
+export const signOutEmail = createAction(
+  '[User] Logout: Start'
+);
+
+export const signOutEmailSuccess = createAction(
+  '[User] Logout: Success'
+);
+
+export const signOutEmailError = createAction(
+  '[User] Logout: Error',
+  props<{ error: string }>()
+);
