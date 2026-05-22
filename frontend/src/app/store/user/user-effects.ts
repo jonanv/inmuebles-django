@@ -21,13 +21,13 @@ export class UserEffects {
 
   constructor(
     private httpClient: HttpClient,
-    private actions: Actions,
+    private actions$: Actions,
     private notificationService: Notification,
     private router: Router
   ) {}
 
   public signUpEmail = createEffect(() =>
-    this.actions.pipe(
+    this.actions$.pipe(
       ofType(fromActions.signUpEmail),
       map((action) => action.user),
       switchMap((userData) =>
@@ -68,7 +68,7 @@ export class UserEffects {
   );
 
   public signInEmail = createEffect(() =>
-    this.actions.pipe(
+    this.actions$.pipe(
       ofType(fromActions.signInEmail),
       map((action) => action.credentials),
       switchMap((userData) =>
@@ -108,7 +108,7 @@ export class UserEffects {
   );
 
   public init = createEffect(() =>
-    this.actions.pipe(
+    this.actions$.pipe(
       ofType(fromActions.init),
       switchMap(async () =>
         localStorage.getItem('token')
