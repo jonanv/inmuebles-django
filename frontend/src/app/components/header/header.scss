@@ -1,0 +1,34 @@
+@use '../../../styles/fonts' as *;
+@use '../../../styles/colors' as *;
+@use '../../../styles/vendor';
+
+mat-toolbar {
+  background-color: $primary-color;
+  font-family: $base-font-family;
+  color: $primary-color-on-text;
+
+  button {
+    color: $primary-color-on-text;
+  }
+}
+
+.navegation-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+a:hover,
+a:active {
+  color: #dbcde6;
+}
+
+.link-activate {
+  color: #dbcde6;
+}

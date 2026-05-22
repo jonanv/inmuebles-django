@@ -1,0 +1,56 @@
+<div class="upload">
+  {{ file.name }}
+
+  <progress
+    class="upload__progress"
+    [value]="percentage"
+    max="100">
+    {{ percentage }}%
+  </progress>
+
+  <div class="upload__info">
+    <div>
+      {{ bytesTransferred | fileSize }} de {{ totalBytes | fileSize }} bytes subidos
+    </div>
+
+    <div>
+      @if (isUploaded && downloadURL) {
+        <div class="upload__success">
+          Archivo subido correctamente
+          <a
+            [href]="downloadURL"
+            class="app-a"
+            target="_blank"
+            rel="noopener">
+            Descargar
+          </a>
+        </div>
+      } @else if (isUploading) {
+        <div class="upload__error">
+
+          <button
+            (click)="pause()"
+            class="button"
+            [disabled]="isPaused">
+            Pausar
+          </button>
+
+          <button
+            (click)="cancel()"
+            class="button">
+            Cancelar
+          </button>
+
+          <button
+            (click)="resume()"
+            class="button"
+            [disabled]="!isPaused">
+            Continuar
+          </button>
+
+        </div>
+      }
+    </div>
+  </div>
+
+</div>

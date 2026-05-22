@@ -1,0 +1,13 @@
+@use '../../../styles/fonts' as *;
+@use '../../../styles/colors' as *;
+@use '../../../styles/vendor';
+
+.navegation-list-label {
+  display: inline-block;
+  padding-left: 6px;
+  font-family: $base-font-family;
+}
+
+.link-activate {
+  color: #dbcde6;
+}

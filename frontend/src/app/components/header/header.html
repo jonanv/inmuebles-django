@@ -1,0 +1,43 @@
+<mat-toolbar
+  color="primary">
+  <button
+    mat-icon-button
+    (click)="onMenuToggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span>Edificaciones Store</span>
+
+  <div
+    fxFlex
+    fxLayout
+    fxLayoutAlign="flex-end"
+    fxHide.xs>
+    <ul
+      class="navegation-menu"
+      fxLayout="row"
+      fxLayoutGap="10px">
+      <li>
+        <a
+          routerLink="/auth/registration"
+          routerLinkActive="link-activate">
+          Registrar
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/auth/login"
+          routerLinkActive="link-activate">
+          Login
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/"
+          routerLinkActive="link-activate">
+          Home
+        </a>
+      </li>
+    </ul>
+  </div>
+</mat-toolbar>

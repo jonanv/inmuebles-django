@@ -1,0 +1,25 @@
+@use '../../../../../styles/fonts' as *;
+
+.flex-container {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  * {
+    font-family: $base-font-family;
+  }
+}
+
+.row {
+  width: auto;
+}
+
+mat-card {
+  max-width: 900px;
+  min-width: 400px;
+  text-align: center;
+  margin-top: 20px;
+}

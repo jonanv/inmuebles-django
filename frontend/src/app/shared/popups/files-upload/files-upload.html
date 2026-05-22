@@ -1,1 +1,61 @@
-<p>files-upload works!</p>
+<div class="files-upload">
+  <div class="files-upload__header">
+    <h3>Files uploading</h3>
+  </div>
+
+  <div class="files-upload__content">
+    @if (!files.length) {
+      <div
+        class="dropzone"
+        appDropZone
+        (hovered)="toggleHovered($event)"
+        [class.dropzone__hovered]="isHovering"
+        (dropped)="onDrop($event)"
+      >
+        <div class="dropzone__label">Deja tus archivos aquí</div>
+        <div class="dropzone__file">
+          <label class="file">
+            <input
+              class="file__input"
+              type="file"
+              [multiple]="data.multiple"
+              (change)="onDropFile($event)"
+            />
+            <span class="file__label">Selecciona</span>
+          </label>
+        </div>
+      </div>
+
+      @if (isError) {
+        <div class="error">
+          Seleccione un archivo
+        </div>
+      }
+    }
+
+    @if (files) {
+      @for (file of files; track $index) {
+        <app-upload
+          [file]="file"
+          (completed)="onUploadCompleted($event)"
+        />
+      }
+    }
+
+  </div>
+
+  <div class="files-upload__footer">
+    <button
+      class="app-button"
+      (click)="onClose()">
+      Cerrar
+    </button>
+    @if (filesURLs.length) {
+      <button
+        class="app-button"
+        (click)="onCompleted()">
+        Completado
+      </button>
+    }
+  </div>
+</div>

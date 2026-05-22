@@ -1,0 +1,15 @@
+@use '../../../../../styles/fonts' as *;
+
+mat-form-field {
+  width: 100%;
+
+  * {
+    font-family: $base-font-family;
+  }
+}
+
+mat-card {
+  width: 300px;
+  text-align: center;
+  margin-top: 20px;
+}
