@@ -35,16 +35,6 @@ export function reducer(state = initialState, action: fromActions.Types | any): 
       }
     };
 
-    case fromActions.Types.INIT_ERROR: {
-      return {
-        ...state,
-        loading: false,
-        entity: null,
-        id: null,
-        error: action.error
-      }
-    };
-
     case fromActions.Types.INIT_UNAUTHORIZED: {
       return {
         ...state,
@@ -52,6 +42,16 @@ export function reducer(state = initialState, action: fromActions.Types | any): 
         entity: null,
         id: null,
         error: null
+      }
+    };
+
+    case fromActions.Types.INIT_ERROR: {
+      return {
+        ...state,
+        loading: false,
+        entity: null,
+        id: null,
+        error: action.error
       }
     };
 
