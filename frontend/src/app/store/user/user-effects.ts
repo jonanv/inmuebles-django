@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -19,12 +19,10 @@ import { environment } from '../../../environments/environment';
 @Injectable()
 export class UserEffects {
 
-  constructor(
-    private httpClient: HttpClient,
-    private actions$: Actions,
-    private notificationService: Notification,
-    private router: Router
-  ) {}
+  private httpClient = inject(HttpClient);
+  private actions$ = inject(Actions);
+  private notificationService = inject(Notification);
+  private router = inject(Router);
 
   public signUpEmail = createEffect(() =>
     this.actions$.pipe(
